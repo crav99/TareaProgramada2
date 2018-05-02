@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataStructures;
+package SistemaAdministracionPaquetes;
 
 /**
  *
  * @author allanvz
  */
-public class Heap {
+public class Cliente {
     
 }

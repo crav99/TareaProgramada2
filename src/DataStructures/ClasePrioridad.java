@@ -9,6 +9,6 @@ package DataStructures;
  *
  * @author allanvz
  */
-public class Heap {
+public class ClasePrioridad {
     
 }
