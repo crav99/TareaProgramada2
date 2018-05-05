@@ -274,17 +274,17 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                   <Component id="jLabel11" alignment="0" pref="150" max="32767" attributes="0"/>
-                                                  <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="windowPerecedero" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="jLabel12" pref="150" max="32767" attributes="0"/>
-                                                  <Component id="jTextField2" max="32767" attributes="0"/>
+                                                  <Component id="windowNoPerecedero" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="jLabel13" pref="150" max="32767" attributes="0"/>
-                                                  <Component id="jTextField3" max="32767" attributes="0"/>
+                                                  <Component id="windowSeguridad" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -299,9 +299,9 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel27" min="-2" pref="84" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel35" min="-2" pref="45" max="-2" attributes="0"/>
+                                              <Component id="totalPerRegular" min="-2" pref="45" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel36" min="-2" pref="45" max="-2" attributes="0"/>
+                                              <Component id="totalNoPerRegular" min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -328,8 +328,8 @@
                                                           </Group>
                                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="tiempoPerecedero1" min="-2" pref="45" max="-2" attributes="0"/>
-                                                              <Component id="tiempoPerecedero2" min="-2" pref="45" max="-2" attributes="0"/>
+                                                              <Component id="totalPerecedero" min="-2" pref="45" max="-2" attributes="0"/>
+                                                              <Component id="totalNoPerecedero" min="-2" pref="45" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                       <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -339,9 +339,9 @@
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Group type="102" attributes="0">
-                                                                  <Component id="jLabel29" min="-2" pref="45" max="-2" attributes="0"/>
+                                                                  <Component id="totalPerDiscapacidad" min="-2" pref="45" max="-2" attributes="0"/>
                                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                                  <Component id="jLabel30" min="-2" pref="45" max="-2" attributes="0"/>
+                                                                  <Component id="totalNoPerDiscapacidad" min="-2" pref="45" max="-2" attributes="0"/>
                                                               </Group>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="jLabel23" min="-2" pref="45" max="-2" attributes="0"/>
@@ -356,16 +356,16 @@
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="jLabel31" min="-2" pref="45" max="-2" attributes="0"/>
+                                                              <Component id="totalPerAdultoMayor" min="-2" pref="45" max="-2" attributes="0"/>
                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="jLabel32" min="-2" pref="45" max="-2" attributes="0"/>
+                                                              <Component id="totalNoPerAdultoMayor" min="-2" pref="45" max="-2" attributes="0"/>
                                                           </Group>
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Component id="jLabel26" min="-2" pref="84" max="-2" attributes="0"/>
                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="jLabel33" min="-2" pref="45" max="-2" attributes="0"/>
+                                                              <Component id="totalPerEmbarazada" min="-2" pref="45" max="-2" attributes="0"/>
                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="jLabel34" min="-2" pref="45" max="-2" attributes="0"/>
+                                                              <Component id="totalNoPerEmbarazada" min="-2" pref="45" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -416,9 +416,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="windowPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="windowNoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="windowSeguridad" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton5" min="-2" max="-2" attributes="0"/>
@@ -437,7 +437,7 @@
                                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tiempoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tiempoNoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -461,12 +461,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tiempoPerecedero1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tiempoPerecedero2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalNoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
@@ -478,26 +478,26 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalPerDiscapacidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalNoPerDiscapacidad" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalPerAdultoMayor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalNoPerAdultoMayor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalPerEmbarazada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalNoPerEmbarazada" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalPerRegular" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalNoPerRegular" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -556,7 +556,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="noPerecederoTable1">
+                <Component class="javax.swing.JTable" name="tableColas">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -607,13 +607,7 @@
                 <Component class="javax.swing.JList" name="clienteList">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -640,7 +634,7 @@
                 <Property name="text" type="java.lang.String" value="Administracion de Ventanillas"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="windowPerecedero">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -658,7 +652,7 @@
                 <Property name="text" type="java.lang.String" value="No Perecedero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="windowNoPerecedero">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
@@ -668,7 +662,7 @@
                 <Property name="text" type="java.lang.String" value="Seguridad"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="windowSeguridad">
             </Component>
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
@@ -763,7 +757,7 @@
                 <Property name="text" type="java.lang.String" value="Perecedero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="tiempoPerecedero1">
+            <Component class="javax.swing.JLabel" name="totalPerecedero">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -780,7 +774,7 @@
                 <Property name="text" type="java.lang.String" value="No Perecedero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="tiempoPerecedero2">
+            <Component class="javax.swing.JLabel" name="totalNoPerecedero">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -845,49 +839,49 @@
                 <Property name="text" type="java.lang.String" value="No Per."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel29">
+            <Component class="javax.swing.JLabel" name="totalPerDiscapacidad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel30">
+            <Component class="javax.swing.JLabel" name="totalNoPerDiscapacidad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel31">
+            <Component class="javax.swing.JLabel" name="totalPerAdultoMayor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel32">
+            <Component class="javax.swing.JLabel" name="totalNoPerAdultoMayor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel33">
+            <Component class="javax.swing.JLabel" name="totalPerEmbarazada">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel34">
+            <Component class="javax.swing.JLabel" name="totalNoPerEmbarazada">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel35">
+            <Component class="javax.swing.JLabel" name="totalPerRegular">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel36">
+            <Component class="javax.swing.JLabel" name="totalNoPerRegular">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -908,7 +902,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="noPerecederoTable2">
+                <Component class="javax.swing.JTable" name="tableTotalPerecedero">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="2" rowCount="3">
@@ -952,7 +946,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="noPerecederoTable3">
+                <Component class="javax.swing.JTable" name="tableTotalNoPerecedero">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="2" rowCount="3">
@@ -996,7 +990,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="noPerecederoTable4">
+                <Component class="javax.swing.JTable" name="tableTotalSeguridad">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="2" rowCount="3">

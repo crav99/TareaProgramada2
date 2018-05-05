@@ -55,18 +55,18 @@ public class SAP extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        noPerecederoTable1 = new javax.swing.JTable();
+        tableColas = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         clienteList = new javax.swing.JList<>();
         jButton4 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        windowPerecedero = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        windowNoPerecedero = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        windowSeguridad = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
@@ -79,9 +79,9 @@ public class SAP extends javax.swing.JFrame {
         tiempoSeguridad = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        tiempoPerecedero1 = new javax.swing.JLabel();
+        totalPerecedero = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        tiempoPerecedero2 = new javax.swing.JLabel();
+        totalNoPerecedero = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -89,23 +89,23 @@ public class SAP extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
+        totalPerDiscapacidad = new javax.swing.JLabel();
+        totalNoPerDiscapacidad = new javax.swing.JLabel();
+        totalPerAdultoMayor = new javax.swing.JLabel();
+        totalNoPerAdultoMayor = new javax.swing.JLabel();
+        totalPerEmbarazada = new javax.swing.JLabel();
+        totalNoPerEmbarazada = new javax.swing.JLabel();
+        totalPerRegular = new javax.swing.JLabel();
+        totalNoPerRegular = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        noPerecederoTable2 = new javax.swing.JTable();
+        tableTotalPerecedero = new javax.swing.JTable();
         jLabel39 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        noPerecederoTable3 = new javax.swing.JTable();
+        tableTotalNoPerecedero = new javax.swing.JTable();
         jLabel40 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        noPerecederoTable4 = new javax.swing.JTable();
+        tableTotalSeguridad = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -213,7 +213,7 @@ public class SAP extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Estado de Colas");
 
-        noPerecederoTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableColas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -224,13 +224,8 @@ public class SAP extends javax.swing.JFrame {
                 "Ventanillas", "Cola", "Cantidad", "Siguiente"
             }
         ));
-        jScrollPane4.setViewportView(noPerecederoTable1);
+        jScrollPane4.setViewportView(tableColas);
 
-        clienteList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane5.setViewportView(clienteList);
 
         jButton4.setText("Ver Clientes");
@@ -284,16 +279,16 @@ public class SAP extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Perecedero");
 
-        tiempoPerecedero1.setBackground(new java.awt.Color(255, 255, 255));
-        tiempoPerecedero1.setText("0");
-        tiempoPerecedero1.setOpaque(true);
+        totalPerecedero.setBackground(new java.awt.Color(255, 255, 255));
+        totalPerecedero.setText("0");
+        totalPerecedero.setOpaque(true);
 
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("No Perecedero");
 
-        tiempoPerecedero2.setBackground(new java.awt.Color(255, 255, 255));
-        tiempoPerecedero2.setText("0");
-        tiempoPerecedero2.setOpaque(true);
+        totalNoPerecedero.setBackground(new java.awt.Color(255, 255, 255));
+        totalNoPerecedero.setText("0");
+        totalNoPerecedero.setOpaque(true);
 
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Total de Clientes Atendidos por Tipos");
@@ -316,34 +311,34 @@ public class SAP extends javax.swing.JFrame {
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("No Per.");
 
-        jLabel29.setText("0");
-        jLabel29.setOpaque(true);
+        totalPerDiscapacidad.setText("0");
+        totalPerDiscapacidad.setOpaque(true);
 
-        jLabel30.setText("0");
-        jLabel30.setOpaque(true);
+        totalNoPerDiscapacidad.setText("0");
+        totalNoPerDiscapacidad.setOpaque(true);
 
-        jLabel31.setText("0");
-        jLabel31.setOpaque(true);
+        totalPerAdultoMayor.setText("0");
+        totalPerAdultoMayor.setOpaque(true);
 
-        jLabel32.setText("0");
-        jLabel32.setOpaque(true);
+        totalNoPerAdultoMayor.setText("0");
+        totalNoPerAdultoMayor.setOpaque(true);
 
-        jLabel33.setText("0");
-        jLabel33.setOpaque(true);
+        totalPerEmbarazada.setText("0");
+        totalPerEmbarazada.setOpaque(true);
 
-        jLabel34.setText("0");
-        jLabel34.setOpaque(true);
+        totalNoPerEmbarazada.setText("0");
+        totalNoPerEmbarazada.setOpaque(true);
 
-        jLabel35.setText("0");
-        jLabel35.setOpaque(true);
+        totalPerRegular.setText("0");
+        totalPerRegular.setOpaque(true);
 
-        jLabel36.setText("0");
-        jLabel36.setOpaque(true);
+        totalNoPerRegular.setText("0");
+        totalNoPerRegular.setOpaque(true);
 
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("Total atendidos Entregas Perec.");
 
-        noPerecederoTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableTotalPerecedero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -353,12 +348,12 @@ public class SAP extends javax.swing.JFrame {
                 "Ventanilla", "Cliente"
             }
         ));
-        jScrollPane6.setViewportView(noPerecederoTable2);
+        jScrollPane6.setViewportView(tableTotalPerecedero);
 
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText("Total atendidos Entregas No Perec.");
 
-        noPerecederoTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tableTotalNoPerecedero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -368,12 +363,12 @@ public class SAP extends javax.swing.JFrame {
                 "Ventanilla", "Cliente"
             }
         ));
-        jScrollPane7.setViewportView(noPerecederoTable3);
+        jScrollPane7.setViewportView(tableTotalNoPerecedero);
 
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("Total atendidos Seguridad");
 
-        noPerecederoTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tableTotalSeguridad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -383,7 +378,7 @@ public class SAP extends javax.swing.JFrame {
                 "Ventanilla", "Cliente"
             }
         ));
-        jScrollPane8.setViewportView(noPerecederoTable4);
+        jScrollPane8.setViewportView(tableTotalSeguridad);
 
         javax.swing.GroupLayout administracionLayout = new javax.swing.GroupLayout(administracion);
         administracion.setLayout(administracionLayout);
@@ -418,15 +413,15 @@ public class SAP extends javax.swing.JFrame {
                                     .addGroup(administracionLayout.createSequentialGroup()
                                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addComponent(windowPerecedero, javax.swing.GroupLayout.Alignment.LEADING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(jTextField2))
+                                            .addComponent(windowNoPerecedero))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(jTextField3)))))
+                                            .addComponent(windowSeguridad)))))
                             .addGroup(administracionLayout.createSequentialGroup()
                                 .addGap(196, 196, 196)
                                 .addComponent(jButton5))
@@ -436,9 +431,9 @@ public class SAP extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, administracionLayout.createSequentialGroup()
                                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(totalPerRegular, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(totalNoPerRegular, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(administracionLayout.createSequentialGroup()
                                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,8 +455,8 @@ public class SAP extends javax.swing.JFrame {
                                                         .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                     .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(tiempoPerecedero1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(tiempoPerecedero2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(totalPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(totalNoPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addComponent(jLabel14)
                                                 .addComponent(jLabel22)
                                                 .addGroup(administracionLayout.createSequentialGroup()
@@ -469,9 +464,9 @@ public class SAP extends javax.swing.JFrame {
                                                     .addGap(18, 18, 18)
                                                     .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(administracionLayout.createSequentialGroup()
-                                                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(totalPerDiscapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addGap(18, 18, 18)
-                                                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(totalNoPerDiscapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(administracionLayout.createSequentialGroup()
                                                             .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addGap(18, 18, 18)
@@ -481,15 +476,15 @@ public class SAP extends javax.swing.JFrame {
                                                     .addGroup(administracionLayout.createSequentialGroup()
                                                         .addComponent(jLabel25)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(totalPerAdultoMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(totalNoPerAdultoMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(administracionLayout.createSequentialGroup()
                                                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(totalPerEmbarazada, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(totalNoPerEmbarazada, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(28, 28, 28)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,9 +520,9 @@ public class SAP extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(windowPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(windowNoPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(windowSeguridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
@@ -544,7 +539,7 @@ public class SAP extends javax.swing.JFrame {
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(tiempoPerecedero))
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(tiempoNoPerecedero))
@@ -563,11 +558,11 @@ public class SAP extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(tiempoPerecedero1))
+                            .addComponent(totalPerecedero))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
-                            .addComponent(tiempoPerecedero2))
+                            .addComponent(totalNoPerecedero))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -577,23 +572,23 @@ public class SAP extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
-                            .addComponent(jLabel29)
-                            .addComponent(jLabel30))
+                            .addComponent(totalPerDiscapacidad)
+                            .addComponent(totalNoPerDiscapacidad))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32))
+                            .addComponent(totalPerAdultoMayor)
+                            .addComponent(totalNoPerAdultoMayor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26)
-                            .addComponent(jLabel33)
-                            .addComponent(jLabel34))
+                            .addComponent(totalPerEmbarazada)
+                            .addComponent(totalNoPerEmbarazada))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27)
-                            .addComponent(jLabel35)
-                            .addComponent(jLabel36)))
+                            .addComponent(totalPerRegular)
+                            .addComponent(totalNoPerRegular)))
                     .addGroup(administracionLayout.createSequentialGroup()
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -841,15 +836,7 @@ public class SAP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -873,23 +860,31 @@ public class SAP extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField nameEntry;
     private javax.swing.JTable noPerecederoTable;
-    private javax.swing.JTable noPerecederoTable1;
-    private javax.swing.JTable noPerecederoTable2;
-    private javax.swing.JTable noPerecederoTable3;
-    private javax.swing.JTable noPerecederoTable4;
     private javax.swing.JComboBox<String> packageSelector;
     private javax.swing.JTable perecederoTable;
     private javax.swing.JTable seguridadTable;
+    private javax.swing.JTable tableColas;
+    private javax.swing.JTable tableTotalNoPerecedero;
+    private javax.swing.JTable tableTotalPerecedero;
+    private javax.swing.JTable tableTotalSeguridad;
     private javax.swing.JLabel tiempoNoPerecedero;
     private javax.swing.JLabel tiempoPerecedero;
-    private javax.swing.JLabel tiempoPerecedero1;
-    private javax.swing.JLabel tiempoPerecedero2;
     private javax.swing.JLabel tiempoSeguridad;
+    private javax.swing.JLabel totalNoPerAdultoMayor;
+    private javax.swing.JLabel totalNoPerDiscapacidad;
+    private javax.swing.JLabel totalNoPerEmbarazada;
+    private javax.swing.JLabel totalNoPerRegular;
+    private javax.swing.JLabel totalNoPerecedero;
+    private javax.swing.JLabel totalPerAdultoMayor;
+    private javax.swing.JLabel totalPerDiscapacidad;
+    private javax.swing.JLabel totalPerEmbarazada;
+    private javax.swing.JLabel totalPerRegular;
+    private javax.swing.JLabel totalPerecedero;
     private javax.swing.JComboBox<String> userSelector;
+    private javax.swing.JTextField windowNoPerecedero;
+    private javax.swing.JTextField windowPerecedero;
+    private javax.swing.JTextField windowSeguridad;
     // End of variables declaration//GEN-END:variables
 }
