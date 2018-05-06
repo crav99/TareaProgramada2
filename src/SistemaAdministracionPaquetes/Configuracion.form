@@ -57,71 +57,59 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" pref="106" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel12" min="-2" pref="106" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="tipoColaCheckinEconomica" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="tipoColaCheckinEjecutiva" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="cantidadVentanasCheckinEconomica" min="-2" pref="106" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cantidadVentanasCheckinEjecutiva" min="-2" pref="106" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" min="-2" pref="106" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cantidadVentanasSeguridad" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="45" pref="45" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jLbTamaño" max="32767" attributes="0"/>
-                              <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
-                              <Component id="tipoColaSeguridad" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jLabel7" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                   <Component id="botonEnter" min="-2" pref="85" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jSliderRango" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="cantidadVentanasEntregasPerecedero" min="-2" pref="135" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="cantidadVentanasEntregasNoPerecedero" min="-2" pref="135" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tipoColaEntregasPerecedero" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                          <Component id="tipoColaEntregasNoPerecedero" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabel12" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="103" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jSliderRango" pref="202" max="32767" attributes="0"/>
+                      <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tipoColaSeguridad" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="cantidadVentanasSeguridad" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLbTamaño" alignment="1" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -145,8 +133,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cantidadVentanasCheckinEconomica" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cantidadVentanasCheckinEjecutiva" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cantidadVentanasEntregasPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cantidadVentanasEntregasNoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -155,8 +143,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tipoColaCheckinEconomica" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tipoColaCheckinEjecutiva" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tipoColaEntregasPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tipoColaEntregasNoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -203,12 +191,12 @@
             <Property name="text" type="java.lang.String" value="Cantidad de ventanas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="cantidadVentanasCheckinEconomica">
+        <Component class="javax.swing.JTextField" name="cantidadVentanasEntregasPerecedero">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Checkin"/>
+            <Property name="text" type="java.lang.String" value="Entregas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="cantidadVentanasSeguridad">
@@ -226,7 +214,7 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Cola Prioridad #1"/>
+                <StringItem index="0" value="Cola Prioridad"/>
                 <StringItem index="1" value="Heap"/>
               </StringArray>
             </Property>
@@ -238,17 +226,17 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="tipoColaCheckinEconomica">
+        <Component class="javax.swing.JComboBox" name="tipoColaEntregasPerecedero">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Cola Prioridad #1"/>
+                <StringItem index="0" value="Cola Prioridad"/>
                 <StringItem index="1" value="Heap"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoColaCheckinEconomicaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoColaEntregasPerecederoActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -271,13 +259,13 @@
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Economica"/>
+            <Property name="text" type="java.lang.String" value="Perecedero"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Ejecutiva"/>
+            <Property name="text" type="java.lang.String" value="No Perecedero"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
@@ -286,7 +274,7 @@
             <Property name="text" type="java.lang.String" value="Cantidad de ventanas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="cantidadVentanasCheckinEjecutiva">
+        <Component class="javax.swing.JTextField" name="cantidadVentanasEntregasNoPerecedero">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -294,11 +282,11 @@
             <Property name="text" type="java.lang.String" value="Tipo de cola"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="tipoColaCheckinEjecutiva">
+        <Component class="javax.swing.JComboBox" name="tipoColaEntregasNoPerecedero">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Cola Prioridad #1"/>
+                <StringItem index="0" value="Cola Prioridad"/>
                 <StringItem index="1" value="Heap"/>
               </StringArray>
             </Property>
@@ -327,6 +315,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Tiempo Maximo de Espera"/>
           </Properties>
         </Component>

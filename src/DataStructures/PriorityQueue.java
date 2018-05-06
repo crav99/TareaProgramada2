@@ -5,239 +5,238 @@
  */
 package DataStructures;
 
+import SistemaAdministracionPaquetes.Cliente;
+
 /**
  *
- * @author allanvz
- * @param <T>
  */
-public class PriorityQueue<T> {
+public class PriorityQueue implements InterfazColas {
     
-    private class Node<T> {
+    /**
+     * Class Node
+     * Specific class for ColasPrioridad11
+     */
+    public class Node {
         
-        private Object priority;
-        private LQueue<T> queue;
-        private Node<T> next;
+        private Cliente pasajero;
+        private Node next;
+        private String prioridad;
         
-        public Node() {
-            this.priority = null;
-            this.queue = new LQueue();
+        /**
+         * Constructor Method Node
+         */
+        public Node(){
+            this.pasajero = null;
             this.next = null;
+            this.prioridad = null;//pasajero.getTiquete().substring(0,4);
         }
         
-        public Node(Object priority) {
-            this.priority = priority;
-            this.queue = new LQueue();
+        /**
+         * Constructor Method Node
+         * @param pasajero Sets passenger of class
+         */
+        public Node(Cliente pasajero){
+            this.pasajero = pasajero;
             this.next = null;
+            this.prioridad = pasajero.getTiquete().substring(0, 4);
         }
         
-        public Node(Object priority, Node next) {
-            this.priority = priority;
-            this.queue = new LQueue();
+        /**
+         * Method Cliente
+         * @return pasajero
+         */
+        public Cliente getPasajero(){
+            return this.pasajero;
+        }
+        
+        /**
+         * Method setPasajero
+         * @param pasajero Sets pasajero
+         */
+        public void setPasajero(Cliente pasajero){
+            this.pasajero = pasajero;
+        }
+        
+        /**
+         * Method getNext
+         * @return next
+         */
+        public Node getNext(){
+            return this.next;
+        }
+        
+        /**
+         * Method setNext
+         * @param next Sets next
+         */
+        public void setNext(Node next){
             this.next = next;
         }
-
+        
         /**
-         * @return the priority
+         * Method getPrioridad
+         * @return prioridad
          */
-        public Object getPriority() {
-            return priority;
+        public String getPrioridad() {
+            return this.prioridad;
         }
-
+        
         /**
-         * @param priority the priority to set
+         * Methos setPrioridad
+         * @param prioridad Sets Prioridad
          */
-        public void setPriority(Object priority) {
-            this.priority = priority;
-        }
-
-        /**
-         * @return the queue
-         */
-        public LQueue<T> getQueue() {
-            return queue;
-        }
-
-        /**
-         * @param queue the queue to set
-         */
-        public void setQueue(LQueue<T> queue) {
-            this.queue = queue;
-        }
-
-        /**
-         * @return the next
-         */
-        public Node<T> getNext() {
-            return next;
-        }
-
-        /**
-         * @param next the next to set
-         */
-        public void setNext(Node<T> next) {
-            this.next = next;
+        public void setPrioridad(String prioridad) {
+            this.prioridad = prioridad;
         }
         
     }
     
-    private Node<T> head;
-    private Node<T> current;
-    private Node<T> tail;
+    private Node head;
+    private Node current;
+    private Node tail;
+    private Integer size;
     private int position;
-    private int size;
+    private String[] prioridad;
     
-    public PriorityQueue() {
-        this.head = null;
+    /**
+     * Constructor Method ColasPrioridad11
+     */
+    public PriorityQueue(){
+        this.head = new Node();
         this.current = this.head;
         this.tail = this.head;
         this.size = 0;
         this.position = -1;
+        this.prioridad = new String[8];
+        this.prioridad[0] = "P-D";
+        this.prioridad[1] = "P-M";
+        this.prioridad[2] = "P-E";
+        this.prioridad[3] = "P-R";
+        this.prioridad[4] = "NP-D";
+        this.prioridad[5] = "NP-M";
+        this.prioridad[6] = "NP-E";
+        this.prioridad[7] = "NP-R";
     }
     
-    public PriorityQueue (PriorityQueue<T> elemento) {
-        this.head = elemento.head;
-        this.current = elemento.head;
-        this.tail = elemento.head;
-        this.size = elemento.size;
-        this.position = elemento.position;
-    }
-    
-    public void insert(Object priority) {
-        Node<T> newNode = new Node(priority);
-        if(this.head == null) {
-            this.head = this.current = this.tail = newNode;
-            this.position = 0;
-        }else {
-            this.current.setNext(head);
-            if(this.current == this.tail) {
-                this.tail = this.tail.getNext();
-            }
+    /**
+     * Method agregarPasajero
+     * @param pasajero Sets next passenger
+     */
+    public void agregarPasajero(Cliente pasajero) {
+        Node nodo = new Node(pasajero);
+        if (this.head.getPasajero() == null) {
+            this.head = nodo;
+            this.current = this.tail = this.head;
+        }else{
+            this.tail.setNext(nodo);
+            this.tail = nodo;
         }
         this.size ++;
     }
     
-    public void append(Object priority) {
-        Node <T> newNode = new Node(priority);
-        if(this.head == null) {
-            this.head = this.current = this.tail = newNode;
-            this.position = 0;
-        }else {
-            this.tail.setNext(newNode);
-            this.tail = newNode;
+    /**
+     * Method getNextPasajero
+     * @return Next Passenger
+     */
+    public Cliente getNextPasajero() {
+        if (this.getSize() == 1 && this.head.getPasajero() == null){
+            return null;
         }
-        this.size ++;
-    }
-    
-    public void remove() {
-        if (this.head == null){
-            System.out.println("Cola vacía, no se puede remover ningún elemento");
-            return;
-        }else if((this.head == this.current) && (this.head == this.tail)) {
-            this.head = this.current = this.tail = null;
-            this.position = -1;
-        }else {
-            Node<T> temp = head;
-            while (temp.getNext() != this.current) {
-                temp = temp.getNext();
+        position = 0;
+        while(this.prioridad.length > position){
+            String prioridadActual = this.prioridad[position];
+            this.current = this.head;
+            String X = this.current.getPrioridad();
+            X = X.substring(0,4);
+            if(X.equals(prioridadActual) == false) {
+                while(this.current.getNext() != null) {
+                    if (prioridadActual.equals(this.current.getNext().getPrioridad()) == true){
+                        //Node<T> temp = this.current.getNext();
+                        //T pasajero = temp.getPasajero();
+                        this.current.setNext(this.current.getNext().getNext());
+                    }
+                }
+            }else{
+                //pasajero = this.current.getPasajero();
+                this.head = this.head.getNext();
+                this.current = this.head;
             }
-
-            temp.setNext(this.current.getNext());
-
-            if (this.current == this.tail) {
-                this.current = this.tail = temp;
-                this.position--;
-            }else {
-                this.current = this.current.getNext();
+            position ++;
+        }
+        this.size --;
+        return this.current.getPasajero();
+    }
+    
+    /**
+     * 
+     * @return First Passenger name
+     */
+    public String getFirstPasajero(){
+        for(int i = 0; i < 8; i++){
+            this.current = this.head;
+            String prioridadActual = this.prioridad[i];
+            for(int j=0; j < this.getSize(); j++){
+                if(prioridadActual.equals(this.current.getPrioridad()) == true){
+                    return this.current.getPasajero().getTiquete();
+                } else {
+                    this.current = this.current.getNext();
+                }    
             }
         }
-        this.size--;
+        return null;
     }
     
-    public void clear() {
-        this.head = this.tail = this.current = null;
-        this.size = 0;
-        this.position = -1;
+    /**
+     * Method getTamañoCola
+     * @return size
+     */
+    public Integer getTamañoCola(){
+        return this.getSize();
     }
     
-    public Object getElement(){
-        return this.current.getPriority();
+    /**
+     * Method getTiquetePasajero
+     * @return Cliente of passenger in current position
+     */
+    public String getTiquetePasajero(){
+        return this.current.getPasajero().getTiquete();
     }
     
-    public int getSize() {
-        return this.size;
-    }
-    
-    public boolean next() {
-        if (this.current == this.tail) {
-            return false;
-        }
-        this.current = this.current.getNext();
-        this.position++;
-        return true;
-    }
-    
-    public boolean previous() {
-        if (this.current == this.head) {
-            return false;
-        }
-        Node temp = head;
-        this.position = 0;
-        while (temp.getNext() != this.current) {
-            temp = temp.getNext();
-            this.position++;
-        }
-        this.current = temp;
-        return true;
-    }
-    
-    public int getPosition() {
-        return this.position;
-    }
-    
-    public void goToStart(){
+    /**
+     * Method goToFirst
+     * Sets position to first
+     */
+    public void goToFirst(){
         this.current = this.head;
         this.position = 0;
     }
     
-    public void goToEnd(){
-        this.current = this.tail;
-        this.position = this.size - 1;
+    /**
+     * Method next
+     * Sets position to next
+     */
+    public void next(){
+        this.current = this.current.getNext();
+        this.position ++;
     }
     
-    public void goToPos(int pos) {
-        if (pos < 0 || pos >= this.size) {
-            System.out.println("Posición inválida");
-            return;
-        }
-        if (pos > this.position) {
-            while (pos > this.position) {
-                this.next();
-            }
-        } else if (pos < this.position) {
-            while (pos < this.position) {
-                this.previous();
-            }
-        }
+    /**
+     * Method getTipo
+     * @return Class type
+     */
+    public String getTipo(){
+        return "Cola Prioridad";
+    }
+
+    /**
+     * @return the size
+     */
+    public Integer getSize() {
+        return this.size;
     }
     
-    @Override
-    public String toString() {
-        Node currentNode = this.head.getNext();
-
-        StringBuffer result = new StringBuffer();
-
-        for (int i = 0; currentNode != null; i++)
-        {
-            if (i > 0)
-            {
-                result.append(",");
-            }
-            Object element = currentNode.getPriority();
-
-            result.append(element == null ? "" : element);
-            currentNode = currentNode.getNext();
-        }
-        return result.toString();
+    public Integer getPos() {
+        return this.position;
     }
     
 }

@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
  */
 public class Configuracion extends javax.swing.JFrame {
 
-    private String tipoDeColaCheckinEconomica;
-    private String tipoDeColaCheckinEjecutiva;
+    private String tipoDeColaEntregasPerecedero;
+    private String tipoDeColaEntregasNoPerecedero;
     private String tipoDeColaSeguridad;
-    private int cantidadDeVentanasCheckinEconomica;
-    private int cantidadDeVentanasCheckinEjecutiva;
+    private int cantidadDeVentanasEntregasPerecedero;
+    private int cantidadDeVentanasEntregasNoPerecedero;
     private int cantidadDeVentanasSeguridad;
     private int rango;
     /**
@@ -43,20 +43,20 @@ public class Configuracion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cantidadVentanasCheckinEconomica = new javax.swing.JTextField();
+        cantidadVentanasEntregasPerecedero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cantidadVentanasSeguridad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tipoColaSeguridad = new javax.swing.JComboBox<>();
-        tipoColaCheckinEconomica = new javax.swing.JComboBox();
+        tipoColaEntregasPerecedero = new javax.swing.JComboBox();
         botonEnter = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        cantidadVentanasCheckinEjecutiva = new javax.swing.JTextField();
+        cantidadVentanasEntregasNoPerecedero = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        tipoColaCheckinEjecutiva = new javax.swing.JComboBox<>();
+        tipoColaEntregasNoPerecedero = new javax.swing.JComboBox<>();
         jSliderRango = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
         jLbTamaño = new javax.swing.JLabel();
@@ -74,7 +74,7 @@ public class Configuracion extends javax.swing.JFrame {
         jLabel3.setText("Cantidad de ventanas");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Checkin");
+        jLabel5.setText("Entregas");
 
         cantidadVentanasSeguridad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,17 +85,17 @@ public class Configuracion extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Tipo de cola");
 
-        tipoColaSeguridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cola Prioridad #1", "Heap" }));
+        tipoColaSeguridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cola Prioridad", "Heap" }));
         tipoColaSeguridad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoColaSeguridadActionPerformed(evt);
             }
         });
 
-        tipoColaCheckinEconomica.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cola Prioridad #1", "Heap" }));
-        tipoColaCheckinEconomica.addActionListener(new java.awt.event.ActionListener() {
+        tipoColaEntregasPerecedero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cola Prioridad", "Heap" }));
+        tipoColaEntregasPerecedero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoColaCheckinEconomicaActionPerformed(evt);
+                tipoColaEntregasPerecederoActionPerformed(evt);
             }
         });
 
@@ -110,10 +110,10 @@ public class Configuracion extends javax.swing.JFrame {
         jLabel2.setText("Tipo de cola");
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Economica");
+        jLabel9.setText("Perecedero");
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Ejecutiva");
+        jLabel10.setText("No Perecedero");
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Cantidad de ventanas");
@@ -121,7 +121,7 @@ public class Configuracion extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Tipo de cola");
 
-        tipoColaCheckinEjecutiva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cola Prioridad #1", "Heap" }));
+        tipoColaEntregasNoPerecedero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cola Prioridad", "Heap" }));
 
         jSliderRango.setBackground(new java.awt.Color(0, 0, 0));
         jSliderRango.setForeground(new java.awt.Color(204, 204, 204));
@@ -134,6 +134,7 @@ public class Configuracion extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Tiempo Maximo de Espera");
 
         jLbTamaño.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -143,55 +144,47 @@ public class Configuracion extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tipoColaCheckinEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tipoColaCheckinEjecutiva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cantidadVentanasCheckinEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cantidadVentanasCheckinEjecutiva, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cantidadVentanasSeguridad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLbTamaño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tipoColaSeguridad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(43, 43, 43))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(201, 201, 201)
                 .addComponent(botonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSliderRango, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cantidadVentanasEntregasPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cantidadVentanasEntregasNoPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tipoColaEntregasPerecedero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(tipoColaEntregasNoPerecedero, 0, 1, Short.MAX_VALUE))
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSliderRango, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tipoColaSeguridad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cantidadVentanasSeguridad, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLbTamaño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,16 +204,16 @@ public class Configuracion extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cantidadVentanasCheckinEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cantidadVentanasCheckinEjecutiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cantidadVentanasEntregasPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidadVentanasEntregasNoPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tipoColaCheckinEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tipoColaCheckinEjecutiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tipoColaEntregasPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tipoColaEntregasNoPerecedero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)
@@ -275,20 +268,20 @@ public class Configuracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoColaSeguridadActionPerformed
 
-    private void tipoColaCheckinEconomicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoColaCheckinEconomicaActionPerformed
+    private void tipoColaEntregasPerecederoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoColaEntregasPerecederoActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_tipoColaCheckinEconomicaActionPerformed
+    }//GEN-LAST:event_tipoColaEntregasPerecederoActionPerformed
 
     private void botonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnterActionPerformed
         // TODO add your handling code here:
-        this.tipoDeColaCheckinEconomica = this.tipoColaCheckinEconomica.getSelectedItem().toString();
+        this.tipoDeColaEntregasPerecedero = this.tipoColaEntregasPerecedero.getSelectedItem().toString();
         this.tipoDeColaSeguridad = this.tipoColaSeguridad.getSelectedItem().toString();
-        this.tipoDeColaCheckinEjecutiva = this.tipoColaCheckinEjecutiva.getSelectedItem().toString();
+        this.tipoDeColaEntregasNoPerecedero = this.tipoColaEntregasNoPerecedero.getSelectedItem().toString();
         try {
-            this.cantidadDeVentanasCheckinEconomica = Integer.parseInt(this.cantidadVentanasCheckinEconomica.getText());
+            this.cantidadDeVentanasEntregasPerecedero = Integer.parseInt(this.cantidadVentanasEntregasPerecedero.getText());
             this.cantidadDeVentanasSeguridad = Integer.parseInt(this.cantidadVentanasSeguridad.getText());
-            this.cantidadDeVentanasCheckinEjecutiva = Integer.parseInt(this.cantidadVentanasCheckinEjecutiva.getText());
+            this.cantidadDeVentanasEntregasNoPerecedero = Integer.parseInt(this.cantidadVentanasEntregasNoPerecedero.getText());
         }catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Enter number in Economical, Executive, and Security amount", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -296,8 +289,7 @@ public class Configuracion extends javax.swing.JFrame {
         this.rango = jSliderRango.getValue();
         SAP frame;
         frame = new SAP();
-        frame.setStructures(this.tipoDeColaCheckinEconomica, this.tipoDeColaCheckinEjecutiva, this.tipoDeColaSeguridad, this.rango);
-        frame.setWindows(this.cantidadDeVentanasCheckinEconomica, this.cantidadDeVentanasCheckinEjecutiva, this.cantidadDeVentanasSeguridad);
+        frame.set(this.tipoDeColaEntregasPerecedero, this.tipoDeColaEntregasNoPerecedero, this.tipoDeColaSeguridad, this.rango, this.cantidadDeVentanasEntregasPerecedero, this.cantidadDeVentanasEntregasNoPerecedero, this.cantidadDeVentanasSeguridad);
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonEnterActionPerformed
@@ -349,8 +341,8 @@ public class Configuracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEnter;
-    private javax.swing.JTextField cantidadVentanasCheckinEconomica;
-    private javax.swing.JTextField cantidadVentanasCheckinEjecutiva;
+    private javax.swing.JTextField cantidadVentanasEntregasNoPerecedero;
+    private javax.swing.JTextField cantidadVentanasEntregasPerecedero;
     private javax.swing.JTextField cantidadVentanasSeguridad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -366,8 +358,8 @@ public class Configuracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLbTamaño;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSliderRango;
-    private javax.swing.JComboBox tipoColaCheckinEconomica;
-    private javax.swing.JComboBox<String> tipoColaCheckinEjecutiva;
+    private javax.swing.JComboBox<String> tipoColaEntregasNoPerecedero;
+    private javax.swing.JComboBox tipoColaEntregasPerecedero;
     private javax.swing.JComboBox<String> tipoColaSeguridad;
     // End of variables declaration//GEN-END:variables
 }

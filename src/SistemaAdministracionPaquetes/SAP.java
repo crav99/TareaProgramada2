@@ -5,13 +5,36 @@
  */
 package SistemaAdministracionPaquetes;
 
+import DataStructures.InterfazColas;
+import DataStructures.LinkedList;
+import DataStructures.PriorityQueue;
+import DataStructures.implementHeap;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  */
 public class SAP extends javax.swing.JFrame {
+    
+    int contador;
+    int VPC;
+    int VNPC;
+    int VSC;
+    InterfazColas perecederoQueue;
+    InterfazColas noPerecederoQueue;
+    InterfazColas securityQueue;
+    DefaultTableModel colasTableModel;
+    DefaultTableModel perecederoTableModel;
+    DefaultTableModel noPerecederoTableModel;
+    DefaultTableModel securityTableModel;
+    DefaultTableModel totalPerecederoTableModel;
+    DefaultTableModel totalNoPerecederoTableModel;
+    DefaultTableModel totalSecurityTableModel;
+    DefaultListModel clientesListModel;
 
     /**
      * Creates new form SAP
@@ -20,15 +43,110 @@ public class SAP extends javax.swing.JFrame {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-
+        this.colasTableModel = (DefaultTableModel) this.tableColas.getModel();
+        this.tableColas.setAutoCreateRowSorter(true);
+        this.perecederoTableModel = (DefaultTableModel) this.perecederoTable.getModel();
+        this.perecederoTable.setAutoCreateRowSorter(true);
+        this.noPerecederoTableModel = (DefaultTableModel) this.noPerecederoTable.getModel();
+        this.noPerecederoTable.setAutoCreateRowSorter(true);
+        this.securityTableModel = (DefaultTableModel) this.securityTable.getModel();
+        this.securityTable.setAutoCreateRowSorter(true);
+        this.totalNoPerecederoTableModel = (DefaultTableModel) this.tableTotalNoPerecedero.getModel();
+        this.tableTotalNoPerecedero.setAutoCreateRowSorter(true);
+        this.totalPerecederoTableModel = (DefaultTableModel) this.tableTotalPerecedero.getModel();
+        this.tableTotalPerecedero.setAutoCreateRowSorter(true);
+        this.totalSecurityTableModel = (DefaultTableModel) this.tableTotalSecurity.getModel();
+        this.tableTotalSecurity.setAutoCreateRowSorter(true);
+        this.clientesListModel = new DefaultListModel();
+        this.clienteList.setModel(this.clientesListModel);
     }
     
-    public void setStructures(String typePerecedero, String typeNoPerecedero, String typeSecurity, int range) {
-        
+    public void set(String typePerecedero, String typeNoPerecedero, String typeSecurity, int range, int tamañoP, int tamañoNP, int tamañoS) {
+        if(typePerecedero.equals("Heap")) {
+            this.perecederoQueue = (InterfazColas) new implementHeap();
+        }else {
+            this.perecederoQueue = (InterfazColas) new PriorityQueue();
+        }
+        if(typeNoPerecedero.equals("Heap")) {
+            this.noPerecederoQueue = (InterfazColas) new implementHeap();
+        }else {
+            this.noPerecederoQueue = (InterfazColas) new PriorityQueue();
+        }
+        if(typeSecurity.equals("Heap")) {
+            this.securityQueue = (InterfazColas) new implementHeap();
+        }else {
+            this.securityQueue = (InterfazColas) new PriorityQueue();
+        }
+        int amount = 1;
+        while(tamañoP >= amount) {
+            Object[] rowTemp =  {"Ventanilla "+amount, "Libre"};
+            this.perecederoTableModel.addRow(rowTemp);
+            Object[] rowAdd = {rowTemp[0], 0};
+            this.totalPerecederoTableModel.addRow(rowAdd);
+            amount ++;
+        }
+        amount = 1;
+        while(tamañoNP >= amount) {
+            Object[] rowTemp = {"Ventanilla "+amount, "Libre"};
+            this.noPerecederoTableModel.addRow(rowTemp);
+            Object[] rowAdd = {rowTemp[0], 0};
+            this.totalNoPerecederoTableModel.addRow(rowAdd);
+            amount ++;
+        }
+        amount = 1;
+        while(tamañoS >= amount) {
+            Object[] rowTemp = {"Ventanilla "+amount, "Libre"};
+            this.securityTableModel.addRow(rowTemp);
+            Object[] rowAdd = {rowTemp[0], 0};
+            this.totalSecurityTableModel.addRow(rowAdd);
+            amount ++;
+        }
+        this.VPC = tamañoP;
+        this.VNPC = tamañoNP;
+        this.VSC = tamañoS;
+        Object[] statusPer= {"Perecedero", typePerecedero, "0", "Vacio"};
+        Object[] statusNoPer= {"No Perecedero", typeNoPerecedero, "0", "Vacio"};
+        Object[] statusSec= {"Seguridad", typeSecurity, "0", "Vacio"};
+        this.colasTableModel.addRow(statusPer);
+        this.colasTableModel.addRow(statusNoPer);
+        this.colasTableModel.addRow(statusSec);
     }
     
-    public void setWindows(int tamañoEC, int tamañoEJ, int tamañoS) {
-        
+    public void addToTypeCount(String type) {
+        switch(type) {
+            case "P-D":
+                String value = String.valueOf(Integer.valueOf(this.totalPerDiscapacidad.getText()) + 1);
+                this.totalPerDiscapacidad.setText(value);
+                break;
+            case "P-M":
+                String value0 = String.valueOf(Integer.valueOf(this.totalPerAdultoMayor.getText()) + 1);
+                this.totalPerAdultoMayor.setText(value0);
+                break;
+            case "P-E":
+                String value1 = String.valueOf(Integer.valueOf(this.totalPerEmbarazada.getText()) + 1);
+                this.totalPerEmbarazada.setText(value1);
+                break;
+            case "P-R":
+                String value2 = String.valueOf(Integer.valueOf(this.totalPerRegular.getText()) + 1);
+                this.totalPerRegular.setText(value2);
+                break;
+            case "NP-D":
+                String value3 = String.valueOf(Integer.valueOf(this.totalNoPerDiscapacidad.getText()) + 1);
+                this.totalNoPerDiscapacidad.setText(value3);
+                break;
+            case "NP-M":
+                String value4 = String.valueOf(Integer.valueOf(this.totalNoPerAdultoMayor.getText()) + 1);
+                this.totalNoPerAdultoMayor.setText(value4);
+                break;
+            case "NP-E":
+                String value5 = String.valueOf(Integer.valueOf(this.totalNoPerEmbarazada.getText()) + 1);
+                this.totalNoPerEmbarazada.setText(value5);
+                break;
+            case "NP-R":
+                String value6 = String.valueOf(Integer.valueOf(this.totalNoPerRegular.getText()) + 1);
+                this.totalNoPerRegular.setText(value6);
+                break;
+        }
     }
 
     /**
@@ -51,6 +169,8 @@ public class SAP extends javax.swing.JFrame {
         packageSelector = new javax.swing.JComboBox<>();
         userSelector = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        phoneEntry = new javax.swing.JTextField();
         administracion = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -105,7 +225,7 @@ public class SAP extends javax.swing.JFrame {
         tableTotalNoPerecedero = new javax.swing.JTable();
         jLabel40 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        tableTotalSeguridad = new javax.swing.JTable();
+        tableTotalSecurity = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -119,7 +239,7 @@ public class SAP extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        seguridadTable = new javax.swing.JTable();
+        securityTable = new javax.swing.JTable();
 
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("Total atendidos por Ventanilla");
@@ -153,6 +273,20 @@ public class SAP extends javax.swing.JFrame {
         userSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Usuario -", "Discapacidad", "Adulto Mayor", "Mujer Embarazada", "Regular" }));
 
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Telefono:");
+
+        phoneEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneEntryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout autoservicioLayout = new javax.swing.GroupLayout(autoservicio);
         autoservicio.setLayout(autoservicioLayout);
@@ -162,23 +296,26 @@ public class SAP extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(autoservicioLayout.createSequentialGroup()
+                .addGap(221, 221, 221)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(autoservicioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(nameEntry, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(emailEntry))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(emailEntry)
+                    .addComponent(phoneEntry))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(packageSelector, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(userSelector, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(autoservicioLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         autoservicioLayout.setVerticalGroup(
             autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,15 +327,19 @@ public class SAP extends javax.swing.JFrame {
                         .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(nameEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(emailEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(packageSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(userSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(autoservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         administracion.setBackground(new java.awt.Color(0, 0, 0));
@@ -215,10 +356,7 @@ public class SAP extends javax.swing.JFrame {
 
         tableColas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Ventanillas", "Cola", "Cantidad", "Siguiente"
@@ -229,6 +367,11 @@ public class SAP extends javax.swing.JFrame {
         jScrollPane5.setViewportView(clienteList);
 
         jButton4.setText("Ver Clientes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,6 +387,11 @@ public class SAP extends javax.swing.JFrame {
         jLabel13.setText("Seguridad");
 
         jButton5.setText("Modificar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,27 +459,35 @@ public class SAP extends javax.swing.JFrame {
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("No Per.");
 
+        totalPerDiscapacidad.setBackground(new java.awt.Color(255, 255, 255));
         totalPerDiscapacidad.setText("0");
         totalPerDiscapacidad.setOpaque(true);
 
+        totalNoPerDiscapacidad.setBackground(new java.awt.Color(255, 255, 255));
         totalNoPerDiscapacidad.setText("0");
         totalNoPerDiscapacidad.setOpaque(true);
 
+        totalPerAdultoMayor.setBackground(new java.awt.Color(255, 255, 255));
         totalPerAdultoMayor.setText("0");
         totalPerAdultoMayor.setOpaque(true);
 
+        totalNoPerAdultoMayor.setBackground(new java.awt.Color(255, 255, 255));
         totalNoPerAdultoMayor.setText("0");
         totalNoPerAdultoMayor.setOpaque(true);
 
+        totalPerEmbarazada.setBackground(new java.awt.Color(255, 255, 255));
         totalPerEmbarazada.setText("0");
         totalPerEmbarazada.setOpaque(true);
 
+        totalNoPerEmbarazada.setBackground(new java.awt.Color(255, 255, 255));
         totalNoPerEmbarazada.setText("0");
         totalNoPerEmbarazada.setOpaque(true);
 
+        totalPerRegular.setBackground(new java.awt.Color(255, 255, 255));
         totalPerRegular.setText("0");
         totalPerRegular.setOpaque(true);
 
+        totalNoPerRegular.setBackground(new java.awt.Color(255, 255, 255));
         totalNoPerRegular.setText("0");
         totalNoPerRegular.setOpaque(true);
 
@@ -340,9 +496,7 @@ public class SAP extends javax.swing.JFrame {
 
         tableTotalPerecedero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ventanilla", "Cliente"
@@ -355,9 +509,7 @@ public class SAP extends javax.swing.JFrame {
 
         tableTotalNoPerecedero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ventanilla", "Cliente"
@@ -368,17 +520,15 @@ public class SAP extends javax.swing.JFrame {
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("Total atendidos Seguridad");
 
-        tableTotalSeguridad.setModel(new javax.swing.table.DefaultTableModel(
+        tableTotalSecurity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ventanilla", "Cliente"
             }
         ));
-        jScrollPane8.setViewportView(tableTotalSeguridad);
+        jScrollPane8.setViewportView(tableTotalSecurity);
 
         javax.swing.GroupLayout administracionLayout = new javax.swing.GroupLayout(administracion);
         administracion.setLayout(administracionLayout);
@@ -566,9 +716,9 @@ public class SAP extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel28))
+                        .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel23))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
@@ -608,10 +758,7 @@ public class SAP extends javax.swing.JFrame {
 
         perecederoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ventanilla", "Cliente"
@@ -627,10 +774,7 @@ public class SAP extends javax.swing.JFrame {
 
         noPerecederoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ventanilla", "Cliente"
@@ -684,7 +828,7 @@ public class SAP extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -695,18 +839,15 @@ public class SAP extends javax.swing.JFrame {
         jLabel7.setText("Seguridad");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
 
-        seguridadTable.setModel(new javax.swing.table.DefaultTableModel(
+        securityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Ventanilla", "Cliente", "Tiempo"
             }
         ));
-        jScrollPane3.setViewportView(seguridadTable);
+        jScrollPane3.setViewportView(securityTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -770,40 +911,183 @@ public class SAP extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailEntryActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SAP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SAP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SAP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SAP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(this.nameEntry.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese su nombre", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        //</editor-fold>
+        if(this.emailEntry.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese su correo", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(this.phoneEntry.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese su numero", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(this.userSelector.getSelectedIndex() == -1 || this.userSelector.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione el tipo de usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(this.packageSelector.getSelectedIndex() == -1 || this.packageSelector.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione el tipo de paquete", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            Integer.valueOf(this.phoneEntry.getText());
+        }catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente su numero", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String tiquete;
+        String user = (String)this.userSelector.getSelectedItem();
+        String type = (String)this.packageSelector.getSelectedItem();
+        int serial;
+        if(type.equals("Perecedero")) {
+            tiquete = "P-";
+            serial = 20;
+        }else {
+            tiquete = "NP-";
+            serial = 10;
+        }
+        switch (user) {
+            case "Regular":
+                tiquete += "R-";
+                serial += 1;
+                break;
+            case "Discapacidad":
+                tiquete += "D-";
+                serial += 4;
+                break;
+            case "Adulto Mayor":
+                tiquete += "M-";
+                serial += 3;
+                break;
+            default:
+                tiquete += "E-";
+                serial += 2;
+                break;
+        }
+        tiquete += this.contador;
+        if(this.contador < 99) {
+            this.contador ++;
+        }else {
+            this.contador = 0;
+        }
+        addToTypeCount(tiquete.substring(0, tiquete.lastIndexOf("-")));
+        String nombre = this.nameEntry.getText();
+        String correo = this.emailEntry.getText();
+        String telefono = this.phoneEntry.getText();
+        Cliente newCliente = new Cliente(tiquete, nombre, correo, telefono, serial);
+        if(type.equals("Perecedero")) {
+            this.perecederoQueue.agregarPasajero(newCliente);
+            this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
+        }else {
+            this.noPerecederoQueue.agregarPasajero(newCliente);
+            this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
+        }
+        JOptionPane.showMessageDialog(null, "Tiquete: "+tiquete, "Info", JOptionPane.INFORMATION_MESSAGE);
+        this.nameEntry.setText(null);
+        this.emailEntry.setText(null);
+        this.phoneEntry.setText(null);
+        this.userSelector.setSelectedIndex(0);
+        this.packageSelector.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SAP().setVisible(true);
+    private void phoneEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneEntryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneEntryActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Integer type= this.tableColas.getSelectedRow();
+        try {
+            this.clientesListModel.clear();
+        }catch(NullPointerException ex) {
+            
+        }
+        if(type == 0) {
+            this.perecederoQueue.goToFirst();
+            while(this.perecederoQueue.getPos() < this.perecederoQueue.getSize()) {
+                this.clientesListModel.addElement(this.perecederoQueue.getTiquetePasajero());
+                this.perecederoQueue.next();
             }
-        });
-    }
+        }else if(type == 1) {
+            this.noPerecederoQueue.goToFirst();
+            while(this.noPerecederoQueue.getPos() < this.noPerecederoQueue.getSize()) {
+                this.clientesListModel.addElement(this.noPerecederoQueue.getTiquetePasajero());
+                this.noPerecederoQueue.next();
+            }
+        }else if(type == 2) {
+            this.securityQueue.goToFirst();
+            while(this.securityQueue.getPos() < this.securityQueue.getSize()) {
+                this.clientesListModel.addElement(this.securityQueue.getTiquetePasajero());
+                this.securityQueue.next();
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            if(!this.windowPerecedero.getText().equals("")) {
+                int cantidad = Integer.valueOf(this.windowPerecedero.getText());
+                if(cantidad > this.perecederoTable.getRowCount()) {
+                    while(cantidad > this.perecederoTable.getRowCount()) {
+                        this.VPC ++;
+                        Object[] rowTemp = {"Ventanilla "+this.VPC, "Libre"};
+                        this.perecederoTableModel.addRow(rowTemp);
+                        Object[] rowAdd = {rowTemp[0], 0};
+                        this.totalPerecederoTableModel.addRow(rowAdd);
+                    }
+                }else if(cantidad < this.perecederoTable.getRowCount()) {
+                    while(cantidad < this.perecederoTable.getRowCount()) {
+                        this.perecederoTableModel.removeRow(this.perecederoTable.getRowCount() - 1);
+                        this.totalPerecederoTableModel.removeRow(this.tableTotalPerecedero.getRowCount() - 1);
+                        this.VPC = cantidad;
+                    }
+                }
+                this.windowPerecedero.setText("");
+            }
+            if(!this.windowNoPerecedero.getText().equals("")) {
+                int cantidad = Integer.valueOf(this.windowNoPerecedero.getText());
+                if(cantidad > this.noPerecederoTable.getRowCount()) {
+                    while(cantidad >= this.noPerecederoTable.getRowCount()) {
+                        this.VNPC ++;
+                        Object[] rowTemp = {"Ventanilla "+this.VNPC, "Libre"};
+                        this.noPerecederoTableModel.addRow(rowTemp);
+                        Object[] rowAdd = {rowTemp[0], 0};
+                        this.totalNoPerecederoTableModel.addRow(rowAdd);
+                    }
+                }else if(cantidad < this.noPerecederoTable.getRowCount()) {
+                    while(cantidad < this.noPerecederoTable.getRowCount()) {
+                        this.noPerecederoTableModel.removeRow(this.noPerecederoTable.getRowCount() - 1);
+                        this.totalNoPerecederoTableModel.removeRow(this.tableTotalNoPerecedero.getRowCount() - 1);
+                        this.VNPC = cantidad;
+                    }
+                }
+                this.windowNoPerecedero.setText("");
+            }
+            if(!this.windowSeguridad.getText().equals("")) {
+                int cantidad = Integer.valueOf(this.windowSeguridad.getText());
+                if(cantidad > this.securityTable.getRowCount()) {
+                    while(cantidad > this.securityTable.getRowCount()) {
+                        this.VSC ++;
+                        Object[] rowTemp = {"Ventanilla "+this.VSC, "Libre"};
+                        this.securityTableModel.addRow(rowTemp);
+                        Object[] rowAdd = {rowTemp[0], 0};
+                        this.totalSecurityTableModel.addRow(rowAdd);
+                    }
+                }else if(cantidad < this.securityTable.getRowCount()) {
+                    while(cantidad < this.securityTable.getRowCount()) {
+                        this.securityTableModel.removeRow(this.securityTable.getRowCount() - 1);
+                        this.totalSecurityTableModel.removeRow(this.tableTotalSecurity.getRowCount() - 1);
+                        this.VSC = cantidad;
+                    }
+                }
+                this.windowSeguridad.setText("");
+            }
+        }catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar cantidad de ventanillas deseadas", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel administracion;
@@ -836,6 +1120,7 @@ public class SAP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -864,11 +1149,12 @@ public class SAP extends javax.swing.JFrame {
     private javax.swing.JTable noPerecederoTable;
     private javax.swing.JComboBox<String> packageSelector;
     private javax.swing.JTable perecederoTable;
-    private javax.swing.JTable seguridadTable;
+    private javax.swing.JTextField phoneEntry;
+    private javax.swing.JTable securityTable;
     private javax.swing.JTable tableColas;
     private javax.swing.JTable tableTotalNoPerecedero;
     private javax.swing.JTable tableTotalPerecedero;
-    private javax.swing.JTable tableTotalSeguridad;
+    private javax.swing.JTable tableTotalSecurity;
     private javax.swing.JLabel tiempoNoPerecedero;
     private javax.swing.JLabel tiempoPerecedero;
     private javax.swing.JLabel tiempoSeguridad;
