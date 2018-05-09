@@ -6,7 +6,6 @@
 package SistemaAdministracionPaquetes;
 
 import DataStructures.InterfazColas;
-import DataStructures.LinkedList;
 import DataStructures.PriorityQueue;
 import DataStructures.implementHeap;
 import java.awt.Dimension;
@@ -1010,21 +1009,31 @@ public class SAP extends javax.swing.JFrame {
         }catch(NullPointerException ex) {
             
         }
-        if(type == 0) {
-            Cliente[] clienteTemp= this.perecederoQueue.getClienteOrder();
-            for(int x = 0; x < clienteTemp.length; x++) {
-                this.clientesListModel.addElement(clienteTemp[x].getTiquete());
+        switch (type) {
+            case 0:
+                {
+                    Cliente[] clienteTemp= this.perecederoQueue.getClienteOrder();
+            for (Cliente clienteTemp1 : clienteTemp) {
+                this.clientesListModel.addElement(clienteTemp1.getTiquete());
             }
-        }else if(type == 1) {
-            Cliente[] clienteTemp = this.noPerecederoQueue.getClienteOrder();
-            for(int x = 0; x < clienteTemp.length; x++) {
-                this.clientesListModel.addElement(clienteTemp[x].getTiquete());
+break;
+                }
+            case 1:
+                {
+                    Cliente[] clienteTemp = this.noPerecederoQueue.getClienteOrder();
+            for (Cliente clienteTemp1 : clienteTemp) {
+                this.clientesListModel.addElement(clienteTemp1.getTiquete());
             }
-        }else if(type == 2) {
-            Cliente[] clienteTemp = this.securityQueue.getClienteOrder();
-            for(int x = 0; x < clienteTemp.length; x++) {
-                this.clientesListModel.addElement(clienteTemp[x].getTiquete());
+break;
+                }
+            case 2:
+                {
+                    Cliente[] clienteTemp = this.securityQueue.getClienteOrder();
+            for (Cliente clienteTemp1 : clienteTemp) {
+                this.clientesListModel.addElement(clienteTemp1.getTiquete());
             }
+break;
+                }
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

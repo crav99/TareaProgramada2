@@ -16,7 +16,6 @@ public class Heap {
 
     public Cliente[] heap;
     public Integer size;
-    public String[] prioridad;
     public int posicion;
 
     /**
@@ -24,17 +23,9 @@ public class Heap {
  Assigns attributes to the heapSort and starts class
      */
     public Heap() {
+        this.posicion = -1;
         this.size = 0;
         heap = new Cliente[this.size];
-        prioridad = new String[8];
-        prioridad[0] = "P-D";
-        prioridad[1] = "P-M";
-        prioridad[2] = "P-E";
-        prioridad[3] = "P-R";
-        prioridad[4] = "NP-D";
-        prioridad[5] = "NP-M";
-        prioridad[6] = "NP-E";
-        prioridad[7] = "NP-R";
     }
     
     /**

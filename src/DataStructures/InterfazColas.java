@@ -11,7 +11,7 @@ import SistemaAdministracionPaquetes.Cliente;
  *
  * Creates interface between ClasePrioridad classes and Heap class
  */
-public interface InterfazColas<T> {
+public interface InterfazColas {
     public void agregarPasajero(Cliente tiquete);
     public Cliente getNextPasajero();
     public String getFirstPasajero();
