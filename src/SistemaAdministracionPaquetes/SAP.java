@@ -945,15 +945,15 @@ public class SAP extends javax.swing.JFrame {
         if(type.equals("Perecedero")) {
             tiquete = "P-";
             serial = 20;
+            String value = String.valueOf(Integer.valueOf(this.totalPerecedero.getText()) + 1);
+            this.totalPerecedero.setText(value);
         }else {
             tiquete = "NP-";
             serial = 10;
+            String value = String.valueOf(Integer.valueOf(this.totalNoPerecedero.getText()) + 1);
+            this.totalNoPerecedero.setText(value);
         }
         switch (user) {
-            case "Regular":
-                tiquete += "R-";
-                serial += 1;
-                break;
             case "Discapacidad":
                 tiquete += "D-";
                 serial += 4;
@@ -962,9 +962,13 @@ public class SAP extends javax.swing.JFrame {
                 tiquete += "M-";
                 serial += 3;
                 break;
-            default:
+            case "Mujer Embarazada":
                 tiquete += "E-";
                 serial += 2;
+                break;
+            case "Regular":
+                tiquete += "R-";
+                serial += 1;
                 break;
         }
         tiquete += this.contador;
@@ -981,9 +985,11 @@ public class SAP extends javax.swing.JFrame {
         if(type.equals("Perecedero")) {
             this.perecederoQueue.agregarPasajero(newCliente);
             this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
+            this.colasTableModel.setValueAt(this.perecederoQueue.getFirstPasajero(), 0, 3);
         }else {
             this.noPerecederoQueue.agregarPasajero(newCliente);
             this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
+            this.colasTableModel.setValueAt(this.noPerecederoQueue.getFirstPasajero(), 1, 3);
         }
         JOptionPane.showMessageDialog(null, "Tiquete: "+tiquete, "Info", JOptionPane.INFORMATION_MESSAGE);
         this.nameEntry.setText(null);
@@ -1005,22 +1011,19 @@ public class SAP extends javax.swing.JFrame {
             
         }
         if(type == 0) {
-            this.perecederoQueue.goToFirst();
-            while(this.perecederoQueue.getPos() < this.perecederoQueue.getSize()) {
-                this.clientesListModel.addElement(this.perecederoQueue.getTiquetePasajero());
-                this.perecederoQueue.next();
+            Cliente[] clienteTemp= this.perecederoQueue.getClienteOrder();
+            for(int x = 0; x < clienteTemp.length; x++) {
+                this.clientesListModel.addElement(clienteTemp[x].getTiquete());
             }
         }else if(type == 1) {
-            this.noPerecederoQueue.goToFirst();
-            while(this.noPerecederoQueue.getPos() < this.noPerecederoQueue.getSize()) {
-                this.clientesListModel.addElement(this.noPerecederoQueue.getTiquetePasajero());
-                this.noPerecederoQueue.next();
+            Cliente[] clienteTemp = this.noPerecederoQueue.getClienteOrder();
+            for(int x = 0; x < clienteTemp.length; x++) {
+                this.clientesListModel.addElement(clienteTemp[x].getTiquete());
             }
         }else if(type == 2) {
-            this.securityQueue.goToFirst();
-            while(this.securityQueue.getPos() < this.securityQueue.getSize()) {
-                this.clientesListModel.addElement(this.securityQueue.getTiquetePasajero());
-                this.securityQueue.next();
+            Cliente[] clienteTemp = this.securityQueue.getClienteOrder();
+            for(int x = 0; x < clienteTemp.length; x++) {
+                this.clientesListModel.addElement(clienteTemp[x].getTiquete());
             }
         }
     }//GEN-LAST:event_jButton4ActionPerformed

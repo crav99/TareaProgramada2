@@ -28,7 +28,7 @@ public class PriorityQueue implements InterfazColas {
         public Node(){
             this.pasajero = null;
             this.next = null;
-            this.prioridad = null;//pasajero.getTiquete().substring(0,4);
+            this.prioridad = null;
         }
         
         /**
@@ -127,9 +127,31 @@ public class PriorityQueue implements InterfazColas {
         if (this.head.getPasajero() == null) {
             this.head = nodo;
             this.current = this.tail = this.head;
-        }else{
-            this.tail.setNext(nodo);
-            this.tail = nodo;
+        }else if(getSize() > 1) {
+            goToFirst();
+            while(this.current.getNext() != null) {
+                if(this.current.getPasajero().getSerial() >= pasajero.getSerial() & this.current.getNext().getPasajero().getSerial() < pasajero.getSerial()) {
+                    nodo.setNext(this.current.getNext());
+                    this.current.setNext(nodo);
+                    this.size ++;
+                    return;
+                }
+                next();
+            }
+            if(this.current.getNext() == null) {
+                nodo.setNext(this.current.getNext());
+                this.current.setNext(nodo);
+                this.tail = nodo;
+            }
+        }else {
+            if(this.head.getPasajero().getSerial() < pasajero.getSerial()) {
+                nodo.setNext(this.head);
+                this.head = nodo;
+            }else{
+                nodo.setNext(this.current.getNext());
+                this.current.setNext(nodo);
+                this.tail = nodo;
+            }
         }
         this.size ++;
     }
@@ -139,32 +161,19 @@ public class PriorityQueue implements InterfazColas {
      * @return Next Passenger
      */
     public Cliente getNextPasajero() {
-        if (this.getSize() == 1 && this.head.getPasajero() == null){
+        if (getSize() == 0){
             return null;
+        }else if(getSize() == 1) {
+            Cliente next = this.head.getPasajero();
+            this.head = new Node();
+            this.current = this.tail = this.head;
+            this.size --;
+            return next;
         }
-        position = 0;
-        while(this.prioridad.length > position){
-            String prioridadActual = this.prioridad[position];
-            this.current = this.head;
-            String X = this.current.getPrioridad();
-            X = X.substring(0,4);
-            if(X.equals(prioridadActual) == false) {
-                while(this.current.getNext() != null) {
-                    if (prioridadActual.equals(this.current.getNext().getPrioridad()) == true){
-                        //Node<T> temp = this.current.getNext();
-                        //T pasajero = temp.getPasajero();
-                        this.current.setNext(this.current.getNext().getNext());
-                    }
-                }
-            }else{
-                //pasajero = this.current.getPasajero();
-                this.head = this.head.getNext();
-                this.current = this.head;
-            }
-            position ++;
-        }
+        Cliente next = this.head.getPasajero();
+        this.head = this.head.getNext();
         this.size --;
-        return this.current.getPasajero();
+        return next;
     }
     
     /**
@@ -172,18 +181,7 @@ public class PriorityQueue implements InterfazColas {
      * @return First Passenger name
      */
     public String getFirstPasajero(){
-        for(int i = 0; i < 8; i++){
-            this.current = this.head;
-            String prioridadActual = this.prioridad[i];
-            for(int j=0; j < this.getSize(); j++){
-                if(prioridadActual.equals(this.current.getPrioridad()) == true){
-                    return this.current.getPasajero().getTiquete();
-                } else {
-                    this.current = this.current.getNext();
-                }    
-            }
-        }
-        return null;
+        return this.head.getPasajero().getTiquete();
     }
     
     /**
@@ -237,6 +235,20 @@ public class PriorityQueue implements InterfazColas {
     
     public Integer getPos() {
         return this.position;
+    }
+    
+    public Cliente getElement() {
+        return this.current.getPasajero();
+    }
+    
+    public Cliente[] getClienteOrder() {
+        Cliente[] arrayTemp = new Cliente[this.size];
+        goToFirst();
+        for(int x = 0; x < this.size; x++) {
+            arrayTemp[x] = getElement();
+            next();
+        }
+        return arrayTemp;
     }
     
 }

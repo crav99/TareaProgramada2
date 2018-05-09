@@ -88,4 +88,8 @@ public class implementHeap implements InterfazColas {
     public Integer getPos() {
         return this.heap.getPos();
     }
+    
+    public Cliente[] getClienteOrder() {
+        return this.heap.BubbleSort(this.heap.heap);
+    }
 }

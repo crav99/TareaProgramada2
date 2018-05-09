@@ -22,4 +22,5 @@ public interface InterfazColas<T> {
     public String getTipo();
     public Integer getSize();
     public Integer getPos();
+    public Cliente[] getClienteOrder();
 }
