@@ -763,6 +763,11 @@ public class SAP extends javax.swing.JFrame {
                 "Ventanilla", "Cliente"
             }
         ));
+        perecederoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                perecederoTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(perecederoTable);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -779,25 +784,31 @@ public class SAP extends javax.swing.JFrame {
                 "Ventanilla", "Cliente"
             }
         ));
+        noPerecederoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                noPerecederoTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(noPerecederoTable);
 
         jButton2.setText("Atender");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Atender");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(115, 115, 115))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -810,6 +821,13 @@ public class SAP extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(84, 84, 84))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(115, 115, 115))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1100,6 +1118,37 @@ break;
             JOptionPane.showMessageDialog(null, "Error al ingresar cantidad de ventanillas deseadas", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(this.perecederoQueue.getSize() != 0) {
+            Cliente next = this.perecederoQueue.getNextPasajero();
+            this.perecederoTable.setValueAt(next.getTiquete(), this.perecederoTable.getSelectedRow(), 1);
+        }else {
+            this.perecederoTable.setValueAt("Libre", this.perecederoTable.getSelectedRow(), 1);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void perecederoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_perecederoTableMouseClicked
+        String selected= (String)this.perecederoTable.getValueAt(this.perecederoTable.getSelectedRow(), 1);
+        if(selected.equals("Libre")) {
+            this.jButton2.setText("Atender");
+        }else {
+            this.jButton2.setText("Atender y Liberar");
+        }
+    }//GEN-LAST:event_perecederoTableMouseClicked
+
+    private void noPerecederoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noPerecederoTableMouseClicked
+        String selected= (String)this.noPerecederoTable.getValueAt(this.noPerecederoTable.getSelectedRow(), 1);
+        if(selected.equals("Libre")) {
+            this.jButton3.setText("Atender");
+        }else {
+            this.jButton3.setText("Atender y Liberar");
+        }
+    }//GEN-LAST:event_noPerecederoTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel administracion;
