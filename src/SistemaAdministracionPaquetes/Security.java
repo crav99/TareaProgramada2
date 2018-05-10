@@ -109,6 +109,7 @@ public class Security extends Thread{
                         Random random = new Random();
                         long number = random.nextInt(this.range) + 1;
                         this.securityTableModel.setValueAt(number, x, 2);
+                        next.startTiempo();
                         this.windows[x] = next;
                         int amount = (int)this.totalSecurityTableModel.getValueAt(x, 1);
                         amount ++;
@@ -116,8 +117,8 @@ public class Security extends Thread{
                     }
                 }
                 if(this.windows[x] != null) {
-                    long time = System.currentTimeMillis() - this.windows[x].getStartTime();
-                    if(time == (long)this.securityTableModel.getValueAt(x, 2)) {
+                    long time = (System.currentTimeMillis() - this.windows[x].getStartTime())/1000;
+                    if(time >= (long)this.securityTableModel.getValueAt(x, 2)) {
                         this.windows[x] = null;
                         this.securityTableModel.setValueAt("Libre", x, 1);
                         this.securityTableModel.setValueAt(null, x, 2);
