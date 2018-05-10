@@ -8,7 +8,7 @@ package SistemaAdministracionPaquetes;
 import DataStructures.InterfazColas;
 import java.util.Random;
 import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 
 /**
  *
@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 public class Security extends Thread{
     
     private InterfazColas colaSeguridad;
-    private DefaultTableModel securityTableModel;
-    private DefaultTableModel totalSecurityTableModel;
+    private JTable securityTableModel;
+    private JTable totalSecurityTableModel;
     private JLabel tiempoSeguridad;
     private Cliente[] windows;
     private int range;
@@ -32,7 +32,7 @@ public class Security extends Thread{
         this.range = 0;
     }
 
-    public Security(InterfazColas colaSeguridad, DefaultTableModel securityTableModel, DefaultTableModel totalSecurityTableModel, JLabel tiempoSeguridad, int range) {
+    public Security(InterfazColas colaSeguridad, JTable securityTableModel, JTable totalSecurityTableModel, JLabel tiempoSeguridad, int range) {
         this.colaSeguridad = colaSeguridad;
         this.securityTableModel = securityTableModel;
         this.totalSecurityTableModel = totalSecurityTableModel;
@@ -58,28 +58,28 @@ public class Security extends Thread{
     /**
      * @return the securityTableModel
      */
-    public DefaultTableModel getSecurityTableModel() {
+    public JTable getSecurityTableModel() {
         return securityTableModel;
     }
 
     /**
      * @param securityTableModel the securityTableModel to set
      */
-    public void setSecurityTableModel(DefaultTableModel securityTableModel) {
+    public void setSecurityTableModel(JTable securityTableModel) {
         this.securityTableModel = securityTableModel;
     }
 
     /**
      * @return the totalSecurityTableModel
      */
-    public DefaultTableModel getTotalSecurityTableModel() {
+    public JTable getTotalSecurityTableModel() {
         return totalSecurityTableModel;
     }
 
     /**
      * @param totalSecurityTableModel the totalSecurityTableModel to set
      */
-    public void setTotalSecurityTableModel(DefaultTableModel totalSecurityTableModel) {
+    public void setTotalSecurityTableModel(JTable totalSecurityTableModel) {
         this.totalSecurityTableModel = totalSecurityTableModel;
     }
 
@@ -100,9 +100,9 @@ public class Security extends Thread{
     @Override
     public void run() {
         while(true) {
-            while(0 < this.colaSeguridad.getSize()) {
-                int x = 0;
-                for(;x < this.securityTableModel.getRowCount(); x++) {
+            int x = 0;
+            for(;x < this.securityTableModel.getRowCount(); x++) {
+                if(this.colaSeguridad.getSize() > 0) {
                     if(this.windows[x] == null) {
                         Cliente next = this.colaSeguridad.getNextPasajero();
                         this.securityTableModel.setValueAt(next.getTiquete(), x, 1);
@@ -113,14 +113,16 @@ public class Security extends Thread{
                         int amount = (int)this.totalSecurityTableModel.getValueAt(x, 1);
                         amount ++;
                         this.totalSecurityTableModel.setValueAt(amount, x, 1);
-                    }else {
-                        long time = System.currentTimeMillis() - this.windows[x].getStartTime();
-                        if(time == (long)this.securityTableModel.getValueAt(x, 2)) {
-                            this.windows[x] = null;
-                            this.securityTableModel.setValueAt("Libre", x, 1);
-                            int amount = Integer.parseInt(this.tiempoSeguridad.getText()) + 1;
-                            this.tiempoSeguridad.setText(String.valueOf(amount));
-                        }
+                    }
+                }
+                if(this.windows[x] != null) {
+                    long time = System.currentTimeMillis() - this.windows[x].getStartTime();
+                    if(time == (long)this.securityTableModel.getValueAt(x, 2)) {
+                        this.windows[x] = null;
+                        this.securityTableModel.setValueAt("Libre", x, 1);
+                        this.securityTableModel.setValueAt(null, x, 2);
+                        int amount = Integer.parseInt(this.tiempoSeguridad.getText()) + 1;
+                        this.tiempoSeguridad.setText(String.valueOf(amount));
                     }
                 }
             }

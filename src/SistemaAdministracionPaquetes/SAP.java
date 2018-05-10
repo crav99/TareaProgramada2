@@ -36,6 +36,8 @@ public class SAP extends javax.swing.JFrame {
     DefaultTableModel totalSecurityTableModel;
     DefaultListModel clientesListModel;
     Security securityThread;
+    Cliente[] perecederoArray;
+    Cliente[] noPerecederoArray;
 
     /**
      * Creates new form SAP
@@ -61,8 +63,10 @@ public class SAP extends javax.swing.JFrame {
         this.clientesListModel = new DefaultListModel();
         this.clienteList.setModel(this.clientesListModel);
         this.range = range;
+        this.perecederoArray = new Cliente[tamañoP];
+        this.noPerecederoArray = new Cliente[tamañoNP];
         set(typePerecedero, typeNoPerecedero, typeSecurity, tamañoP, tamañoNP, tamañoS);
-        this.securityThread = new Security(this.securityQueue, this.securityTableModel, this.totalSecurityTableModel, this.tiempoSeguridad, this.range);
+        this.securityThread = new Security(this.securityQueue, this.securityTable, this.tableTotalSecurity, this.tiempoSeguridad, this.range);
         this.securityThread.start();
     }
     
@@ -1126,16 +1130,33 @@ break;
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(this.perecederoArray[this.perecederoTable.getSelectedRow()] != null) {
+            this.securityQueue.agregarPasajero(this.perecederoArray[this.perecederoTable.getSelectedRow()]);
+            this.securityThread.setColaSeguridad(this.securityQueue);
+        }
         if(this.perecederoQueue.getSize() != 0) {
             Cliente next = this.perecederoQueue.getNextPasajero();
             this.perecederoTable.setValueAt(next.getTiquete(), this.perecederoTable.getSelectedRow(), 1);
+            this.perecederoArray[this.perecederoTable.getSelectedRow()] = next;
         }else {
+            this.perecederoArray[this.perecederoTable.getSelectedRow()] = null;
             this.perecederoTable.setValueAt("Libre", this.perecederoTable.getSelectedRow(), 1);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        if(this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] != null) {
+            this.securityQueue.agregarPasajero(this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()]);
+            this.securityThread.setColaSeguridad(this.securityQueue);
+        }
+        if(this.noPerecederoQueue.getSize() != 0) {
+            Cliente next = this.noPerecederoQueue.getNextPasajero();
+            this.noPerecederoTable.setValueAt(next.getTiquete(), this.noPerecederoTable.getSelectedRow(), 1);
+            this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] = next;
+        }else {
+            this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] = null;
+            this.perecederoTable.setValueAt("Libre", this.noPerecederoTable.getSelectedRow(), 1);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void perecederoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_perecederoTableMouseClicked
