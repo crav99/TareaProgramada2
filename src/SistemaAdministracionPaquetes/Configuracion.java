@@ -288,8 +288,7 @@ public class Configuracion extends javax.swing.JFrame {
         }
         this.rango = jSliderRango.getValue();
         SAP frame;
-        frame = new SAP();
-        frame.set(this.tipoDeColaEntregasPerecedero, this.tipoDeColaEntregasNoPerecedero, this.tipoDeColaSeguridad, this.rango, this.cantidadDeVentanasEntregasPerecedero, this.cantidadDeVentanasEntregasNoPerecedero, this.cantidadDeVentanasSeguridad);
+        frame = new SAP(this.tipoDeColaEntregasPerecedero, this.tipoDeColaEntregasNoPerecedero, this.tipoDeColaSeguridad, this.rango, this.cantidadDeVentanasEntregasPerecedero, this.cantidadDeVentanasEntregasNoPerecedero, this.cantidadDeVentanasSeguridad);
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonEnterActionPerformed

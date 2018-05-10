@@ -23,6 +23,7 @@ public class SAP extends javax.swing.JFrame {
     int VPC;
     int VNPC;
     int VSC;
+    int range;
     InterfazColas perecederoQueue;
     InterfazColas noPerecederoQueue;
     InterfazColas securityQueue;
@@ -34,11 +35,12 @@ public class SAP extends javax.swing.JFrame {
     DefaultTableModel totalNoPerecederoTableModel;
     DefaultTableModel totalSecurityTableModel;
     DefaultListModel clientesListModel;
+    Security securityThread;
 
     /**
      * Creates new form SAP
      */
-    public SAP() {
+    public SAP(String typePerecedero, String typeNoPerecedero, String typeSecurity, int range, int tamañoP, int tamañoNP, int tamañoS) {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
@@ -58,9 +60,13 @@ public class SAP extends javax.swing.JFrame {
         this.tableTotalSecurity.setAutoCreateRowSorter(true);
         this.clientesListModel = new DefaultListModel();
         this.clienteList.setModel(this.clientesListModel);
+        this.range = range;
+        set(typePerecedero, typeNoPerecedero, typeSecurity, tamañoP, tamañoNP, tamañoS);
+        this.securityThread = new Security(this.securityQueue, this.securityTableModel, this.totalSecurityTableModel, this.tiempoSeguridad, this.range);
+        this.securityThread.start();
     }
     
-    public void set(String typePerecedero, String typeNoPerecedero, String typeSecurity, int range, int tamañoP, int tamañoNP, int tamañoS) {
+    public void set(String typePerecedero, String typeNoPerecedero, String typeSecurity, int tamañoP, int tamañoNP, int tamañoS) {
         if(typePerecedero.equals("Heap")) {
             this.perecederoQueue = (InterfazColas) new implementHeap();
         }else {

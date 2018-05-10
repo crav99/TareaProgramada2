@@ -6,6 +6,7 @@
 package SistemaAdministracionPaquetes;
 
 import DataStructures.InterfazColas;
+import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,19 +20,25 @@ public class Security extends Thread{
     private DefaultTableModel securityTableModel;
     private DefaultTableModel totalSecurityTableModel;
     private JLabel tiempoSeguridad;
+    private Cliente[] windows;
+    private int range;
     
     public Security() {
         this.colaSeguridad = null;
         this.securityTableModel = null;
         this.totalSecurityTableModel = null;
         this.tiempoSeguridad = null;
+        this.windows = new Cliente[this.securityTableModel.getRowCount()];
+        this.range = 0;
     }
 
-    public Security(InterfazColas colaSeguridad, DefaultTableModel securityTableModel, DefaultTableModel totalSecurityTableModel, JLabel tiempoSeguridad, int numWindow) {
+    public Security(InterfazColas colaSeguridad, DefaultTableModel securityTableModel, DefaultTableModel totalSecurityTableModel, JLabel tiempoSeguridad, int range) {
         this.colaSeguridad = colaSeguridad;
         this.securityTableModel = securityTableModel;
         this.totalSecurityTableModel = totalSecurityTableModel;
         this.tiempoSeguridad = tiempoSeguridad;
+        this.windows = new Cliente[this.securityTableModel.getRowCount()];
+        this.range = range;
     }
 
     /**
@@ -94,15 +101,28 @@ public class Security extends Thread{
     public void run() {
         while(true) {
             while(0 < this.colaSeguridad.getSize()) {
-                Cliente next = this.colaSeguridad.getNextPasajero();
                 int x = 0;
                 for(;x < this.securityTableModel.getRowCount(); x++) {
-                    if(!this.securityTableModel.getValueAt(x, 1).equals("Libre")) {
-                        break;
+                    if(this.windows[x] == null) {
+                        Cliente next = this.colaSeguridad.getNextPasajero();
+                        this.securityTableModel.setValueAt(next.getTiquete(), x, 1);
+                        Random random = new Random();
+                        long number = random.nextInt(this.range) + 1;
+                        this.securityTableModel.setValueAt(number, x, 2);
+                        this.windows[x] = next;
+                        int amount = (int)this.totalSecurityTableModel.getValueAt(x, 1);
+                        amount ++;
+                        this.totalSecurityTableModel.setValueAt(amount, x, 1);
+                    }else {
+                        long time = System.currentTimeMillis() - this.windows[x].getStartTime();
+                        if(time == (long)this.securityTableModel.getValueAt(x, 2)) {
+                            this.windows[x] = null;
+                            this.securityTableModel.setValueAt("Libre", x, 1);
+                            int amount = Integer.parseInt(this.tiempoSeguridad.getText()) + 1;
+                            this.tiempoSeguridad.setText(String.valueOf(amount));
+                        }
                     }
                 }
-                this.securityTableModel.setValueAt(next.getTiquete(), x, 1);
-                
             }
         }
     }

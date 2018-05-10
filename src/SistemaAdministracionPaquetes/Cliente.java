@@ -64,7 +64,7 @@ public class Cliente {
      * @return tiempo
      */
     public long finishTime(){
-        this.tiempo = (System.currentTimeMillis()-startTime);
+        this.tiempo = (System.currentTimeMillis()-getStartTime());
         return this.tiempo;
     }
     
@@ -105,6 +105,13 @@ public class Cliente {
      */
     public int getSerial() {
         return serial;
+    }
+
+    /**
+     * @return the startTime
+     */
+    public long getStartTime() {
+        return startTime;
     }
     
 }
