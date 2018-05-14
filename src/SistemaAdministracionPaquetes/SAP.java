@@ -8,6 +8,7 @@ package SistemaAdministracionPaquetes;
 import DataStructures.InterfazColas;
 import DataStructures.PriorityQueue;
 import DataStructures.implementHeap;
+import com.teknikindustries.bulksms.SMS;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
@@ -1018,6 +1019,12 @@ public class SAP extends javax.swing.JFrame {
             this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
             this.colasTableModel.setValueAt(this.noPerecederoQueue.getFirstPasajero(), 1, 3);
         }
+        try {
+            SMS smsTut = new SMS();
+            smsTut.SendSMS("avrg99", "CRav99..", "Welcome "+nombre+". Your ticket number is "+newCliente.getTiquete(), "506"+newCliente.getTelefono(), "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en envio de mensaje");
+        }
         JOptionPane.showMessageDialog(null, "Tiquete: "+tiquete, "Info", JOptionPane.INFORMATION_MESSAGE);
         this.nameEntry.setText(null);
         this.emailEntry.setText(null);
@@ -1132,7 +1139,6 @@ break;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(this.perecederoArray[this.perecederoTable.getSelectedRow()] != null) {
             this.securityQueue.agregarPasajero(this.perecederoArray[this.perecederoTable.getSelectedRow()]);
-            this.securityThread.setColaSeguridad(this.securityQueue);
         }
         if(this.perecederoQueue.getSize() != 0) {
             Cliente next = this.perecederoQueue.getNextPasajero();
@@ -1147,7 +1153,6 @@ break;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] != null) {
             this.securityQueue.agregarPasajero(this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()]);
-            this.securityThread.setColaSeguridad(this.securityQueue);
         }
         if(this.noPerecederoQueue.getSize() != 0) {
             Cliente next = this.noPerecederoQueue.getNextPasajero();
