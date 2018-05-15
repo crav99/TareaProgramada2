@@ -9,50 +9,77 @@ import DataStructures.InterfazColas;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author allanvz
+ *
  */
-public class Security extends Thread{
+public class securityQueue extends Thread{
     
-    private InterfazColas colaSeguridad;
+    private InterfazColas securityQueue;
     private JTable securityTableModel;
     private JTable totalSecurityTableModel;
     private JLabel tiempoSeguridad;
     private Cliente[] windows;
     private int range;
+    private int time;
+    private DefaultTableModel colasTableModel;
+    private InterfazColas perecederoQueue;
+    private InterfazColas noPerecederoQueue;
     
-    public Security() {
-        this.colaSeguridad = null;
+    /**
+     *
+     */
+    public securityQueue() {
+        this.securityQueue = null;
         this.securityTableModel = null;
         this.totalSecurityTableModel = null;
         this.tiempoSeguridad = null;
+        this.colasTableModel = null;
+        this.perecederoQueue = null;
+        this.noPerecederoQueue = null;
         this.windows = new Cliente[this.securityTableModel.getRowCount()];
         this.range = 0;
+        this.time = 0;
     }
 
-    public Security(InterfazColas colaSeguridad, JTable securityTableModel, JTable totalSecurityTableModel, JLabel tiempoSeguridad, int range) {
-        this.colaSeguridad = colaSeguridad;
+    /**
+     *
+     * @param colaSeguridad
+     * @param perecederoQueue
+     * @param noPerecederoQueue
+     * @param colasTableModel
+     * @param securityTableModel
+     * @param totalSecurityTableModel
+     * @param tiempoSeguridad
+     * @param range
+     */
+    public securityQueue(InterfazColas colaSeguridad, InterfazColas perecederoQueue, InterfazColas noPerecederoQueue, DefaultTableModel colasTableModel, JTable securityTableModel, JTable totalSecurityTableModel, JLabel tiempoSeguridad, int range) {
+        this.securityQueue = colaSeguridad;
         this.securityTableModel = securityTableModel;
         this.totalSecurityTableModel = totalSecurityTableModel;
         this.tiempoSeguridad = tiempoSeguridad;
+        this.perecederoQueue = perecederoQueue;
+        this.noPerecederoQueue = noPerecederoQueue;
+        this.colasTableModel = colasTableModel;
         this.windows = new Cliente[this.securityTableModel.getRowCount()];
         this.range = range;
+        this.time = 0;
     }
 
     /**
-     * @return the colaSeguridad
+     * @return the securityQueue
      */
     public InterfazColas getColaSeguridad() {
-        return colaSeguridad;
+        return securityQueue;
     }
 
     /**
-     * @param colaSeguridad the colaSeguridad to set
+     * @param colaSeguridad the securityQueue to set
      */
     public void setColaSeguridad(InterfazColas colaSeguridad) {
-        this.colaSeguridad = colaSeguridad;
+        this.securityQueue = colaSeguridad;
     }
 
     /**
@@ -97,18 +124,47 @@ public class Security extends Thread{
         this.tiempoSeguridad = tiempoSeguridad;
     }
     
+    /**
+     *
+     */
+    public void updateQueueStatus() {
+        try {
+            this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
+            this.colasTableModel.setValueAt(this.perecederoQueue.getFirstPasajero(), 0, 3);
+        }catch(NullPointerException ex) {
+            this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
+            this.colasTableModel.setValueAt("", 0, 3);
+        }
+        try {
+            this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
+            this.colasTableModel.setValueAt(this.noPerecederoQueue.getFirstPasajero(), 1, 3);
+        }catch(NullPointerException ex) {
+            this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
+            this.colasTableModel.setValueAt("", 1, 3);
+        }
+        try {
+            this.colasTableModel.setValueAt(this.securityQueue.getSize(), 2, 2);
+            this.colasTableModel.setValueAt(this.securityQueue.getFirstPasajero(), 2, 3);
+        }catch(NullPointerException ex) {
+            this.colasTableModel.setValueAt(this.securityQueue.getSize(), 2, 2);
+            this.colasTableModel.setValueAt("", 2, 3);
+        }
+    }
+    
     @Override
     public void run() {
         while(true) {
             int x = 0;
             for(;x < this.securityTableModel.getRowCount(); x++) {
-                if(this.colaSeguridad.getSize() > 0) {
+                if(this.securityQueue.getSize() > 0) {
                     if(this.windows[x] == null) {
-                        Cliente next = this.colaSeguridad.getNextPasajero();
+                        Cliente next = this.securityQueue.getNextPasajero();
                         this.securityTableModel.setValueAt(next.getTiquete(), x, 1);
                         Random random = new Random();
                         long number = random.nextInt(this.range) + 1;
                         this.securityTableModel.setValueAt(number, x, 2);
+                        this.time += next.finishTime()/1000;
+                        this.tiempoSeguridad.setText(String.valueOf(this.time));
                         next.startTiempo();
                         this.windows[x] = next;
                         int amount = (int)this.totalSecurityTableModel.getValueAt(x, 1);
@@ -122,11 +178,10 @@ public class Security extends Thread{
                         this.windows[x] = null;
                         this.securityTableModel.setValueAt("Libre", x, 1);
                         this.securityTableModel.setValueAt(null, x, 2);
-                        int amount = Integer.parseInt(this.tiempoSeguridad.getText()) + 1;
-                        this.tiempoSeguridad.setText(String.valueOf(amount));
                     }
                 }
             }
+            updateQueueStatus();
         }
     }
     

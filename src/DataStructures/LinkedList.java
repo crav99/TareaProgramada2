@@ -61,6 +61,10 @@ public class LinkedList<T> {
     private int size;
 
     //constructores LinkedList
+
+    /**
+     *
+     */
     
     public LinkedList() {
         this.head = new Node<>();
@@ -70,6 +74,10 @@ public class LinkedList<T> {
         this.position = -1;
     }
     
+    /**
+     *
+     * @param elemento
+     */
     public LinkedList (LinkedList<T> elemento) {
         this.head = elemento.head;
         this.current = elemento.head;
@@ -78,6 +86,10 @@ public class LinkedList<T> {
         this.position = elemento.position;
     }
     
+    /**
+     *
+     * @param element
+     */
     public void insert(T element) {
         Node<T> newNode = new Node(element, this.current.getNext());
         this.current.setNext(newNode);
@@ -88,6 +100,10 @@ public class LinkedList<T> {
 
     }
 
+    /**
+     *
+     * @param element
+     */
     public void append(T element) {
         Node<T> newNode = new Node(element);
         this.tail.setNext(newNode);
@@ -95,6 +111,9 @@ public class LinkedList<T> {
         this.size++;
     }
 
+    /**
+     *
+     */
     public void remove() {
         
         if ((this.head == this.current) && (this.head == this.tail)){
@@ -118,20 +137,35 @@ public class LinkedList<T> {
         this.size--;
     }
 
+    /**
+     *
+     */
     public void clear() {
         this.head = this.tail = this.current = new Node<>();
         this.position = -1;
         this.size = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public T getElement(){
         return this.current.getElement();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSize() {
         return this.size;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean next() {
         if (this.current == this.tail) {
             return false;
@@ -141,6 +175,10 @@ public class LinkedList<T> {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean previous() {
         if (this.current == this.head) {
             return false;
@@ -155,20 +193,34 @@ public class LinkedList<T> {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPosition() {
         return this.position;
     }
 
+    /**
+     *
+     */
     public void goToStart(){
         this.current = this.head;
         this.position = -1;
     }
 
+    /**
+     *
+     */
     public void goToEnd(){
         this.current = this.tail;
         this.position = this.size - 1;
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void goToPos(int pos) {
         if (pos < 0 || pos >= this.size) {
             System.out.println("Posición inválida");
@@ -185,6 +237,11 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     *
+     * @param element
+     * @return
+     */
     public int getPositionOfElement(T element) {
         Node tempNode = this.head;
         int position = -1;

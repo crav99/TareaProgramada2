@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
+ *
  */
 public class SAP extends javax.swing.JFrame {
     
@@ -36,12 +37,19 @@ public class SAP extends javax.swing.JFrame {
     DefaultTableModel totalNoPerecederoTableModel;
     DefaultTableModel totalSecurityTableModel;
     DefaultListModel clientesListModel;
-    Security securityThread;
+    securityQueue securityThread;
     Cliente[] perecederoArray;
     Cliente[] noPerecederoArray;
 
     /**
      * Creates new form SAP
+     * @param typePerecedero
+     * @param tamañoP
+     * @param typeNoPerecedero
+     * @param range
+     * @param typeSecurity
+     * @param tamañoNP
+     * @param tamañoS
      */
     public SAP(String typePerecedero, String typeNoPerecedero, String typeSecurity, int range, int tamañoP, int tamañoNP, int tamañoS) {
         initComponents();
@@ -67,10 +75,19 @@ public class SAP extends javax.swing.JFrame {
         this.perecederoArray = new Cliente[tamañoP];
         this.noPerecederoArray = new Cliente[tamañoNP];
         set(typePerecedero, typeNoPerecedero, typeSecurity, tamañoP, tamañoNP, tamañoS);
-        this.securityThread = new Security(this.securityQueue, this.securityTable, this.tableTotalSecurity, this.tiempoSeguridad, this.range);
+        this.securityThread = new securityQueue(this.securityQueue, this.perecederoQueue, this.noPerecederoQueue, this.colasTableModel, this.securityTable, this.tableTotalSecurity, this.tiempoSeguridad, this.range);
         this.securityThread.start();
     }
     
+    /**
+     *
+     * @param typePerecedero
+     * @param typeNoPerecedero
+     * @param typeSecurity
+     * @param tamañoP
+     * @param tamañoNP
+     * @param tamañoS
+     */
     public void set(String typePerecedero, String typeNoPerecedero, String typeSecurity, int tamañoP, int tamañoNP, int tamañoS) {
         if(typePerecedero.equals("Heap")) {
             this.perecederoQueue = (InterfazColas) new implementHeap();
@@ -122,6 +139,10 @@ public class SAP extends javax.swing.JFrame {
         this.colasTableModel.addRow(statusSec);
     }
     
+    /**
+     *
+     * @param type
+     */
     public void addToTypeCount(String type) {
         switch(type) {
             case "P-D":
@@ -157,6 +178,20 @@ public class SAP extends javax.swing.JFrame {
                 this.totalNoPerRegular.setText(value6);
                 break;
         }
+    }
+    
+    /**
+     *
+     * @param array
+     * @param size
+     * @return
+     */
+    public Object[] adjustArray(Object[] array, int size) {
+        Object[] newArray = new Object[size];
+        for(int x = 0; x < newArray.length && x < array.length; x++) {
+            newArray[x] = array[x];
+        }
+        return newArray;
     }
 
     /**
@@ -1010,14 +1045,11 @@ public class SAP extends javax.swing.JFrame {
         String correo = this.emailEntry.getText();
         String telefono = this.phoneEntry.getText();
         Cliente newCliente = new Cliente(tiquete, nombre, correo, telefono, serial);
+        newCliente.startTiempo();
         if(type.equals("Perecedero")) {
             this.perecederoQueue.agregarPasajero(newCliente);
-            this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
-            this.colasTableModel.setValueAt(this.perecederoQueue.getFirstPasajero(), 0, 3);
         }else {
             this.noPerecederoQueue.agregarPasajero(newCliente);
-            this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
-            this.colasTableModel.setValueAt(this.noPerecederoQueue.getFirstPasajero(), 1, 3);
         }
         try {
             SMS smsTut = new SMS();
@@ -1039,36 +1071,39 @@ public class SAP extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Integer type= this.tableColas.getSelectedRow();
+        if(type == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione la cola que desea consultar", "Seleccione", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         try {
             this.clientesListModel.clear();
         }catch(NullPointerException ex) {
             
         }
+        Cliente[] clienteTemp = new Cliente[0];
         switch (type) {
             case 0:
                 {
-                    Cliente[] clienteTemp= this.perecederoQueue.getClienteOrder();
-            for (Cliente clienteTemp1 : clienteTemp) {
-                this.clientesListModel.addElement(clienteTemp1.getTiquete());
-            }
-break;
+                    clienteTemp= this.perecederoQueue.getClienteOrder();
+                    break;
                 }
             case 1:
                 {
-                    Cliente[] clienteTemp = this.noPerecederoQueue.getClienteOrder();
-            for (Cliente clienteTemp1 : clienteTemp) {
-                this.clientesListModel.addElement(clienteTemp1.getTiquete());
-            }
-break;
+                    clienteTemp = this.noPerecederoQueue.getClienteOrder();
+                    break;
                 }
             case 2:
                 {
-                    Cliente[] clienteTemp = this.securityQueue.getClienteOrder();
-            for (Cliente clienteTemp1 : clienteTemp) {
-                this.clientesListModel.addElement(clienteTemp1.getTiquete());
-            }
-break;
+                    clienteTemp = this.securityQueue.getClienteOrder();
+                    break;
                 }
+        }
+        if(clienteTemp.length == 0) {
+            JOptionPane.showMessageDialog(null, "No hay clientes en la cola seleccionada");
+            return;
+        }
+        for (Cliente clienteTemp1 : clienteTemp) {
+            this.clientesListModel.addElement(clienteTemp1.getTiquete());
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1091,6 +1126,7 @@ break;
                         this.VPC = cantidad;
                     }
                 }
+                adjustArray(this.perecederoArray, cantidad);
                 this.windowPerecedero.setText("");
             }
             if(!this.windowNoPerecedero.getText().equals("")) {
@@ -1110,6 +1146,7 @@ break;
                         this.VNPC = cantidad;
                     }
                 }
+                adjustArray(noPerecederoArray, cantidad);
                 this.windowNoPerecedero.setText("");
             }
             if(!this.windowSeguridad.getText().equals("")) {
@@ -1137,30 +1174,66 @@ break;
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(this.perecederoTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione la ventana en la que desea atender");
+            return;
+        }
+        if(this.perecederoQueue.getSize() == 0 && this.perecederoTable.getValueAt(this.perecederoTable.getSelectedRow(), 1).equals("Libre")) {
+            JOptionPane.showMessageDialog(null, "No hay clientes en la cola Perecedero", "Cola vacía", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         if(this.perecederoArray[this.perecederoTable.getSelectedRow()] != null) {
-            this.securityQueue.agregarPasajero(this.perecederoArray[this.perecederoTable.getSelectedRow()]);
+            Cliente atendiendo = this.perecederoArray[this.perecederoTable.getSelectedRow()];
+            atendiendo.startTiempo();
+            this.securityQueue.agregarPasajero(atendiendo);
         }
         if(this.perecederoQueue.getSize() != 0) {
             Cliente next = this.perecederoQueue.getNextPasajero();
+            int tiempo = Integer.parseInt(this.tiempoPerecedero.getText());
+            tiempo += next.finishTime()/1000;
+            this.tiempoPerecedero.setText(String.valueOf(tiempo));
             this.perecederoTable.setValueAt(next.getTiquete(), this.perecederoTable.getSelectedRow(), 1);
             this.perecederoArray[this.perecederoTable.getSelectedRow()] = next;
+            int amount = (int)this.tableTotalPerecedero.getValueAt(this.perecederoTable.getSelectedRow(), 1);
+            amount ++;
+            this.tableTotalPerecedero.setValueAt(amount, this.perecederoTable.getSelectedRow(), 1);
+            this.jButton2.setText("Atender y Liberar");
         }else {
             this.perecederoArray[this.perecederoTable.getSelectedRow()] = null;
             this.perecederoTable.setValueAt("Libre", this.perecederoTable.getSelectedRow(), 1);
+            this.jButton2.setText("Atender");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(this.noPerecederoTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione la ventana en la que desea atender");
+            return;
+        }
+        if(this.noPerecederoQueue.getSize() == 0 && this.noPerecederoTable.getValueAt(this.noPerecederoTable.getSelectedRow(), 1).equals("Libre")) {
+            JOptionPane.showMessageDialog(null, "No hay clientes en la cola No Perecedero", "Cola vacía", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         if(this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] != null) {
-            this.securityQueue.agregarPasajero(this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()]);
+            Cliente atendiendo = this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()];
+            atendiendo.startTiempo();
+            this.securityQueue.agregarPasajero(atendiendo);
         }
         if(this.noPerecederoQueue.getSize() != 0) {
             Cliente next = this.noPerecederoQueue.getNextPasajero();
+            int tiempo = Integer.parseInt(this.tiempoNoPerecedero.getText());
+            tiempo += next.finishTime()/1000;
+            this.tiempoNoPerecedero.setText(String.valueOf(tiempo));
             this.noPerecederoTable.setValueAt(next.getTiquete(), this.noPerecederoTable.getSelectedRow(), 1);
             this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] = next;
+            int amount = (int)this.tableTotalNoPerecedero.getValueAt(this.noPerecederoTable.getSelectedRow(), 1);
+            amount ++;
+            this.tableTotalNoPerecedero.setValueAt(amount, this.noPerecederoTable.getSelectedRow(), 1);
+            this.jButton3.setText("Atender y Liberar");
         }else {
             this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] = null;
             this.perecederoTable.setValueAt("Libre", this.noPerecederoTable.getSelectedRow(), 1);
+            this.jButton3.setText("Atender");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -9,6 +9,7 @@ import SistemaAdministracionPaquetes.Cliente;
 
 /**
  *
+ *
  */
 public class PriorityQueue implements InterfazColas {
     
@@ -233,14 +234,26 @@ public class PriorityQueue implements InterfazColas {
         return this.size;
     }
     
+    /**
+     *
+     * @return
+     */
     public Integer getPos() {
         return this.position;
     }
     
+    /**
+     *
+     * @return
+     */
     public Cliente getElement() {
         return this.current.getPasajero();
     }
     
+    /**
+     *
+     * @return
+     */
     public Cliente[] getClienteOrder() {
         Cliente[] arrayTemp = new Cliente[this.size];
         goToFirst();

@@ -57,18 +57,29 @@ public class LQueue<T> {
     private Node<T> rear;
     private int size;
 
+    /**
+     *
+     */
     public LQueue(){
         this.front = new Node<T>();
         this.rear = this.front;
         this.size = 0;
     }
 
+    /**
+     *
+     * @param element
+     */
     public void enqueue(T element){
         this.rear.setNext(new Node<T>(element, null));
         this.rear = rear.getNext();
         this.size++;
     }
 
+    /**
+     *
+     * @return
+     */
     public T dequeue(){
         if(this.size == 0){
             System.out.println("Queue is empty");
@@ -84,6 +95,10 @@ public class LQueue<T> {
         return temp;
     }
 
+    /**
+     *
+     * @return
+     */
     public Object first(){
         if(this.size == 0){
             System.out.println("Queue is empty");
@@ -92,10 +107,17 @@ public class LQueue<T> {
         return this.front.getNext().getElement();
     }
 
+    /**
+     *
+     * @return
+     */
     public int size(){
         return this.size;
     }
 
+    /**
+     *
+     */
     public void clear(){
         this.front = new Node<>();
         this.rear = this.front;
@@ -114,6 +136,9 @@ public class LQueue<T> {
         return result;
     }
 
+    /**
+     *
+     */
     public void rotate(){
         if (this.size == 0) {
             System.out.println("Queue is empty");
@@ -137,6 +162,9 @@ public class LQueue<T> {
         }
     }
 
+    /**
+     *
+     */
     public void rotate2(){
         if (this.size == 0) {
             System.out.println("Queue is empty");
@@ -160,6 +188,11 @@ public class LQueue<T> {
         }
     }
     
+    /**
+     *
+     * @param pos
+     * @return
+     */
     public T getPos(int pos) {
         Node<T> current = this.front.getNext();
         int tPos = 0;

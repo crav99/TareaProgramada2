@@ -7,15 +7,25 @@ package DataStructures;
 
 import SistemaAdministracionPaquetes.Cliente;
 
-//allan
-
 /**
+ *
  *
  */
 public class Heap {
 
+    /**
+     *
+     */
     public Cliente[] heap;
+
+    /**
+     *
+     */
     public Integer size;
+
+    /**
+     *
+     */
     public int posicion;
 
     /**
@@ -116,6 +126,7 @@ public class Heap {
      * Sets position selected to correct position in heapSort starting from the top
      * @param heapTemp
      * @param pos Sets position to start
+     * @return 
      */
     public Cliente[] siftdown(Cliente[] heapTemp, int pos){
         int cambios = 1;
@@ -271,10 +282,18 @@ public class Heap {
         return "Heap";
     }
     
+    /**
+     *
+     * @return
+     */
     public Integer getSize() {
         return this.size;
     }
     
+    /**
+     *
+     * @return
+     */
     public Integer getPos() {
         return this.posicion;
     }
@@ -283,6 +302,7 @@ public class Heap {
      * Sets position selected to correct position in heapSort starting from the top
      * @param heapTemp
      * @param pos Sets position to start
+     * @param end
      */
     public void siftdown(Cliente[] heapTemp, int pos, int end){
         int cambios = 1;
@@ -318,6 +338,11 @@ public class Heap {
         }
     }
     
+    /**
+     *
+     * @param list
+     * @return
+     */
     public Cliente[] BubbleSort(Cliente[] list) {
         boolean swapped = true;
         while(swapped) {

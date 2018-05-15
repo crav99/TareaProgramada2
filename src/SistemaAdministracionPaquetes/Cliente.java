@@ -7,6 +7,7 @@ package SistemaAdministracionPaquetes;
 
 /**
  *
+ *
  */
 public class Cliente {
     private final String tiquete;

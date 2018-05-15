@@ -9,10 +9,14 @@ import SistemaAdministracionPaquetes.Cliente;
 
 /**
  *
+ *
  */
 public class implementHeap implements InterfazColas {
     private Heap heap;
     
+    /**
+     *
+     */
     public implementHeap(){
         heap = new Heap();
     }
@@ -81,14 +85,26 @@ public class implementHeap implements InterfazColas {
         return this.heap.getTipo();
     }
     
+    /**
+     *
+     * @return
+     */
     public Integer getSize() {
         return this.heap.getSize();
     }
     
+    /**
+     *
+     * @return
+     */
     public Integer getPos() {
         return this.heap.getPos();
     }
     
+    /**
+     *
+     * @return
+     */
     public Cliente[] getClienteOrder() {
         return this.heap.BubbleSort(this.heap.heap);
     }
