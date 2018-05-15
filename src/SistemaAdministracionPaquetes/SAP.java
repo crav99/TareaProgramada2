@@ -40,6 +40,7 @@ public class SAP extends javax.swing.JFrame {
     securityQueue securityThread;
     Cliente[] perecederoArray;
     Cliente[] noPerecederoArray;
+    VentanaAtender atender;
 
     /**
      * Creates new form SAP
@@ -74,6 +75,9 @@ public class SAP extends javax.swing.JFrame {
         this.range = range;
         this.perecederoArray = new Cliente[tamañoP];
         this.noPerecederoArray = new Cliente[tamañoNP];
+        this.atender = new VentanaAtender();
+        this.atender.setVisible(true);
+        this.atender.setAlwaysOnTop(true);
         set(typePerecedero, typeNoPerecedero, typeSecurity, tamañoP, tamañoNP, tamañoS);
         this.securityThread = new securityQueue(this.securityQueue, this.perecederoQueue, this.noPerecederoQueue, this.colasTableModel, this.securityTable, this.tableTotalSecurity, this.tiempoSeguridad, this.range);
         this.securityThread.start();
@@ -1197,7 +1201,8 @@ public class SAP extends javax.swing.JFrame {
             int amount = (int)this.tableTotalPerecedero.getValueAt(this.perecederoTable.getSelectedRow(), 1);
             amount ++;
             this.tableTotalPerecedero.setValueAt(amount, this.perecederoTable.getSelectedRow(), 1);
-            this.jButton2.setText("Atender y Liberar");
+            this.jButton2.setText("Liberar y Atender");
+            this.atender.atender("Atendiendo cliente: "+next.getTiquete()+", en la ventanilla #"+(this.perecederoTable.getSelectedRow()+1)+" en perecederos");
         }else {
             this.perecederoArray[this.perecederoTable.getSelectedRow()] = null;
             this.perecederoTable.setValueAt("Libre", this.perecederoTable.getSelectedRow(), 1);
@@ -1229,10 +1234,11 @@ public class SAP extends javax.swing.JFrame {
             int amount = (int)this.tableTotalNoPerecedero.getValueAt(this.noPerecederoTable.getSelectedRow(), 1);
             amount ++;
             this.tableTotalNoPerecedero.setValueAt(amount, this.noPerecederoTable.getSelectedRow(), 1);
-            this.jButton3.setText("Atender y Liberar");
+            this.jButton3.setText("Liberar y Atender");
+            this.atender.atender("Atendiendo cliente: "+next.getTiquete()+", en la ventanilla #"+(this.noPerecederoTable.getSelectedRow()+1)+" en no perecederos");
         }else {
             this.noPerecederoArray[this.noPerecederoTable.getSelectedRow()] = null;
-            this.perecederoTable.setValueAt("Libre", this.noPerecederoTable.getSelectedRow(), 1);
+            this.noPerecederoTable.setValueAt("Libre", this.noPerecederoTable.getSelectedRow(), 1);
             this.jButton3.setText("Atender");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1242,7 +1248,7 @@ public class SAP extends javax.swing.JFrame {
         if(selected.equals("Libre")) {
             this.jButton2.setText("Atender");
         }else {
-            this.jButton2.setText("Atender y Liberar");
+            this.jButton2.setText("Liberar y Atender");
         }
     }//GEN-LAST:event_perecederoTableMouseClicked
 
@@ -1251,7 +1257,7 @@ public class SAP extends javax.swing.JFrame {
         if(selected.equals("Libre")) {
             this.jButton3.setText("Atender");
         }else {
-            this.jButton3.setText("Atender y Liberar");
+            this.jButton3.setText("Liberar y Atender");
         }
     }//GEN-LAST:event_noPerecederoTableMouseClicked
 
