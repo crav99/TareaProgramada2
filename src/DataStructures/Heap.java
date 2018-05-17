@@ -79,7 +79,7 @@ public class Heap {
     }
     
     /**
-     * Inserts the element entered into the hepa
+     * Inserts the element entered into the heap
      * @param element Element to insert in heapSort
      */
     public void insert(Cliente element){
@@ -137,7 +137,7 @@ public class Heap {
             Cliente hijoIzquierdo = heapTemp[pos*2+1];
             Cliente hijoDerecho = null;
             Cliente cambio;
-            if (pos*2+2 < heapTemp.length-1){
+            if (pos*2+2 < heapTemp.length){
                 hijoDerecho = heapTemp[pos*2+2];
             }
             if (hijoDerecho != null){
@@ -201,7 +201,7 @@ public class Heap {
             this.heap[position] = newHeap[position];
             position ++;
         }
-        siftdown(this.heap, pos);
+        this.heap = siftdown(this.heap, pos);
         return pasajero;
     }
     
@@ -221,13 +221,7 @@ public class Heap {
                 position ++;
             }
 
-            this.heap = new Cliente[this.size];
-
-            position = 0;
-            while(this.heap.length > position){
-                this.heap[position] = newHeap[position];
-                position ++;
-            }
+            this.heap = newHeap;
             this.heap = siftdown(this.heap, 0);
             return pasajero;
         }else{
