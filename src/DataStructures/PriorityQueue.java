@@ -127,15 +127,9 @@ public class PriorityQueue implements InterfazColas {
         Node nodo = new Node(pasajero);
         if (this.head.getPasajero() == null) {
             this.head = nodo;
-            this.current = this.tail = nodo;
+            this.current = this.tail = this.head;
         }else if(getSize() > 1) {
             goToFirst();
-            if(this.current.getPasajero().getSerial() < pasajero.getSerial()) {
-                nodo.setNext(this.current);
-                this.head = nodo;
-                this.size ++;
-                return;
-            }
             while(this.current.getNext() != null) {
                 if(this.current.getPasajero().getSerial() >= pasajero.getSerial() & this.current.getNext().getPasajero().getSerial() < pasajero.getSerial()) {
                     nodo.setNext(this.current.getNext());
