@@ -54,9 +54,8 @@ public class securityQueue extends Thread{
      * @param totalSecurityTableModel
      * @param tiempoSeguridad
      * @param range
-     * @param windows
      */
-    public securityQueue(InterfazColas colaSeguridad, InterfazColas perecederoQueue, InterfazColas noPerecederoQueue, DefaultTableModel colasTableModel, JTable securityTableModel, JTable totalSecurityTableModel, JLabel tiempoSeguridad, int range, Cliente[] windows) {
+    public securityQueue(InterfazColas colaSeguridad, InterfazColas perecederoQueue, InterfazColas noPerecederoQueue, DefaultTableModel colasTableModel, JTable securityTableModel, JTable totalSecurityTableModel, JLabel tiempoSeguridad, int range) {
         this.securityQueue = colaSeguridad;
         this.securityTableModel = securityTableModel;
         this.totalSecurityTableModel = totalSecurityTableModel;
@@ -64,7 +63,7 @@ public class securityQueue extends Thread{
         this.perecederoQueue = perecederoQueue;
         this.noPerecederoQueue = noPerecederoQueue;
         this.colasTableModel = colasTableModel;
-        this.windows = windows;
+        this.windows = new Cliente[this.securityTableModel.getRowCount()];
         this.range = range;
         this.time = 0;
     }
@@ -125,10 +124,6 @@ public class securityQueue extends Thread{
         this.tiempoSeguridad = tiempoSeguridad;
     }
     
-    public void setWindows(Cliente[] windows) {
-        this.windows = windows;
-    }
-    
     /**
      *
      */
@@ -136,21 +131,21 @@ public class securityQueue extends Thread{
         try {
             this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
             this.colasTableModel.setValueAt(this.perecederoQueue.getFirstPasajero(), 0, 3);
-        }catch(NullPointerException |ArrayIndexOutOfBoundsException ex) {
+        }catch(NullPointerException ex) {
             this.colasTableModel.setValueAt(this.perecederoQueue.getSize(), 0, 2);
             this.colasTableModel.setValueAt("", 0, 3);
         }
         try {
             this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
             this.colasTableModel.setValueAt(this.noPerecederoQueue.getFirstPasajero(), 1, 3);
-        }catch(NullPointerException |ArrayIndexOutOfBoundsException ex) {
+        }catch(NullPointerException ex) {
             this.colasTableModel.setValueAt(this.noPerecederoQueue.getSize(), 1, 2);
             this.colasTableModel.setValueAt("", 1, 3);
         }
         try {
             this.colasTableModel.setValueAt(this.securityQueue.getSize(), 2, 2);
             this.colasTableModel.setValueAt(this.securityQueue.getFirstPasajero(), 2, 3);
-        }catch(NullPointerException |ArrayIndexOutOfBoundsException ex) {
+        }catch(NullPointerException ex) {
             this.colasTableModel.setValueAt(this.securityQueue.getSize(), 2, 2);
             this.colasTableModel.setValueAt("", 2, 3);
         }
