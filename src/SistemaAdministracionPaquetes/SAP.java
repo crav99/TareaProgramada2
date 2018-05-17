@@ -1057,12 +1057,12 @@ public class SAP extends javax.swing.JFrame {
         }else {
             this.noPerecederoQueue.agregarPasajero(newCliente);
         }
-//        try {
-//            SMS smsTut = new SMS();
-//            smsTut.SendSMS("avrg99", "CRav99..", "Welcome "+nombre+". Your ticket number is "+newCliente.getTiquete(), "506"+newCliente.getTelefono(), "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Error en envio de mensaje");
-//        }
+        try {
+            SMS smsTut = new SMS();
+            smsTut.SendSMS("avrg99", "CRav99..", "Welcome "+nombre+". Your ticket number is "+newCliente.getTiquete(), "506"+newCliente.getTelefono(), "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en envio de mensaje");
+        }
         JOptionPane.showMessageDialog(null, "Tiquete: "+tiquete, "Info", JOptionPane.INFORMATION_MESSAGE);
         this.nameEntry.setText(null);
         this.emailEntry.setText(null);
