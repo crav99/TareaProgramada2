@@ -97,7 +97,6 @@ public class PriorityQueue implements InterfazColas {
     private Node tail;
     private Integer size;
     private int position;
-    private String[] prioridad;
     
     /**
      * Constructor Method ColasPrioridad11
@@ -108,15 +107,6 @@ public class PriorityQueue implements InterfazColas {
         this.tail = this.head;
         this.size = 0;
         this.position = -1;
-        this.prioridad = new String[8];
-        this.prioridad[0] = "P-D";
-        this.prioridad[1] = "P-M";
-        this.prioridad[2] = "P-E";
-        this.prioridad[3] = "P-R";
-        this.prioridad[4] = "NP-D";
-        this.prioridad[5] = "NP-M";
-        this.prioridad[6] = "NP-E";
-        this.prioridad[7] = "NP-R";
     }
     
     /**
@@ -127,9 +117,15 @@ public class PriorityQueue implements InterfazColas {
         Node nodo = new Node(pasajero);
         if (this.head.getPasajero() == null) {
             this.head = nodo;
-            this.current = this.tail = this.head;
+            this.current = this.tail = nodo;
         }else if(getSize() > 1) {
             goToFirst();
+            if(this.current.getPasajero().getSerial() < pasajero.getSerial()) {
+                nodo.setNext(this.current);
+                this.head = nodo;
+                this.size ++;
+                return;
+            }
             while(this.current.getNext() != null) {
                 if(this.current.getPasajero().getSerial() >= pasajero.getSerial() & this.current.getNext().getPasajero().getSerial() < pasajero.getSerial()) {
                     nodo.setNext(this.current.getNext());
@@ -168,7 +164,7 @@ public class PriorityQueue implements InterfazColas {
             Cliente next = this.head.getPasajero();
             this.head = new Node();
             this.current = this.tail = this.head;
-            this.size --;
+            this.size = 0;
             return next;
         }
         Cliente next = this.head.getPasajero();

@@ -6,6 +6,7 @@
 package DataStructures;
 
 import SistemaAdministracionPaquetes.Cliente;
+import java.util.Arrays;
 
 /**
  *
@@ -79,7 +80,7 @@ public class Heap {
     }
     
     /**
-     * Inserts the element entered into the hepa
+     * Inserts the element entered into the heap
      * @param element Element to insert in heapSort
      */
     public void insert(Cliente element){
@@ -99,7 +100,6 @@ public class Heap {
             position ++;
         }
         siftup(this.size-1);
-        
     }
     
     /**
@@ -130,18 +130,18 @@ public class Heap {
      */
     public Cliente[] siftdown(Cliente[] heapTemp, int pos){
         int cambios = 1;
-        while(pos*2+1 < heapTemp.length-1 && cambios > 0){
+        while(pos*2+1 < heapTemp.length && cambios > 0){
             cambios = 0;
             int prioridadCambio;
             Cliente actual = heapTemp[pos];
             Cliente hijoIzquierdo = heapTemp[pos*2+1];
             Cliente hijoDerecho = null;
             Cliente cambio;
-            if (pos*2+2 < heapTemp.length-1){
+            if (pos*2+2 < heapTemp.length){
                 hijoDerecho = heapTemp[pos*2+2];
             }
             if (hijoDerecho != null){
-                if(hijoIzquierdo.getSerial() < hijoDerecho.getSerial()){
+                if(hijoIzquierdo.getSerial() > hijoDerecho.getSerial()){
                     cambio = hijoIzquierdo;
                     prioridadCambio = pos*2+1;
                 }else{
@@ -153,7 +153,7 @@ public class Heap {
                 prioridadCambio = pos*2+1;
             }
             
-            if(cambio.getSerial() < actual.getSerial()){
+            if(cambio.getSerial() > actual.getSerial()){
                 heapTemp[pos] = cambio;
                 heapTemp[prioridadCambio] = actual;
                 cambios ++;
@@ -201,7 +201,7 @@ public class Heap {
             this.heap[position] = newHeap[position];
             position ++;
         }
-        siftdown(this.heap, pos);
+        this.heap = siftdown(this.heap, pos);
         return pasajero;
     }
     
@@ -221,13 +221,7 @@ public class Heap {
                 position ++;
             }
 
-            this.heap = new Cliente[this.size];
-
-            position = 0;
-            while(this.heap.length > position){
-                this.heap[position] = newHeap[position];
-                position ++;
-            }
+            this.heap = newHeap;
             this.heap = siftdown(this.heap, 0);
             return pasajero;
         }else{
@@ -358,5 +352,6 @@ public class Heap {
         }
         return list;
     }
+    
 }
 

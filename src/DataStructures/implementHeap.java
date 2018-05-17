@@ -6,6 +6,7 @@
 package DataStructures;
 
 import SistemaAdministracionPaquetes.Cliente;
+import java.util.Arrays;
 
 /**
  *
@@ -108,4 +109,5 @@ public class implementHeap implements InterfazColas {
     public Cliente[] getClienteOrder() {
         return this.heap.BubbleSort(this.heap.heap);
     }
+    
 }

@@ -40,6 +40,7 @@ public class SAP extends javax.swing.JFrame {
     securityQueue securityThread;
     Cliente[] perecederoArray;
     Cliente[] noPerecederoArray;
+    Cliente[] securityWindows;
     VentanaAtender atender;
 
     /**
@@ -78,8 +79,9 @@ public class SAP extends javax.swing.JFrame {
         this.atender = new VentanaAtender();
         this.atender.setVisible(true);
         this.atender.setAlwaysOnTop(true);
+        this.securityWindows = new Cliente[tamañoS];
         set(typePerecedero, typeNoPerecedero, typeSecurity, tamañoP, tamañoNP, tamañoS);
-        this.securityThread = new securityQueue(this.securityQueue, this.perecederoQueue, this.noPerecederoQueue, this.colasTableModel, this.securityTable, this.tableTotalSecurity, this.tiempoSeguridad, this.range);
+        this.securityThread = new securityQueue(this.securityQueue, this.perecederoQueue, this.noPerecederoQueue, this.colasTableModel, this.securityTable, this.tableTotalSecurity, this.tiempoSeguridad, this.range, this.securityWindows);
         this.securityThread.start();
     }
     
@@ -190,8 +192,8 @@ public class SAP extends javax.swing.JFrame {
      * @param size
      * @return
      */
-    public Object[] adjustArray(Object[] array, int size) {
-        Object[] newArray = new Object[size];
+    public Cliente[] adjustArray(Cliente[] array, int size) {
+        Cliente[] newArray = new Cliente[size];
         for(int x = 0; x < newArray.length && x < array.length; x++) {
             newArray[x] = array[x];
         }
@@ -1055,12 +1057,12 @@ public class SAP extends javax.swing.JFrame {
         }else {
             this.noPerecederoQueue.agregarPasajero(newCliente);
         }
-        try {
-            SMS smsTut = new SMS();
-            smsTut.SendSMS("avrg99", "CRav99..", "Welcome "+nombre+". Your ticket number is "+newCliente.getTiquete(), "506"+newCliente.getTelefono(), "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error en envio de mensaje");
-        }
+//        try {
+//            SMS smsTut = new SMS();
+//            smsTut.SendSMS("avrg99", "CRav99..", "Welcome "+nombre+". Your ticket number is "+newCliente.getTiquete(), "506"+newCliente.getTelefono(), "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Error en envio de mensaje");
+//        }
         JOptionPane.showMessageDialog(null, "Tiquete: "+tiquete, "Info", JOptionPane.INFORMATION_MESSAGE);
         this.nameEntry.setText(null);
         this.emailEntry.setText(null);
@@ -1130,13 +1132,13 @@ public class SAP extends javax.swing.JFrame {
                         this.VPC = cantidad;
                     }
                 }
-                adjustArray(this.perecederoArray, cantidad);
+                this.perecederoArray = adjustArray(this.perecederoArray, cantidad);
                 this.windowPerecedero.setText("");
             }
             if(!this.windowNoPerecedero.getText().equals("")) {
                 int cantidad = Integer.valueOf(this.windowNoPerecedero.getText());
                 if(cantidad > this.noPerecederoTable.getRowCount()) {
-                    while(cantidad >= this.noPerecederoTable.getRowCount()) {
+                    while(cantidad > this.noPerecederoTable.getRowCount()) {
                         this.VNPC ++;
                         Object[] rowTemp = {"Ventanilla "+this.VNPC, "Libre"};
                         this.noPerecederoTableModel.addRow(rowTemp);
@@ -1150,11 +1152,13 @@ public class SAP extends javax.swing.JFrame {
                         this.VNPC = cantidad;
                     }
                 }
-                adjustArray(noPerecederoArray, cantidad);
+                this.noPerecederoArray = adjustArray(noPerecederoArray, cantidad);
                 this.windowNoPerecedero.setText("");
             }
             if(!this.windowSeguridad.getText().equals("")) {
                 int cantidad = Integer.valueOf(this.windowSeguridad.getText());
+                this.securityWindows = adjustArray(this.securityWindows, cantidad);
+                this.securityThread.setWindows(this.securityWindows);
                 if(cantidad > this.securityTable.getRowCount()) {
                     while(cantidad > this.securityTable.getRowCount()) {
                         this.VSC ++;
